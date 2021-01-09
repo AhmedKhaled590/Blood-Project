@@ -1,0 +1,117 @@
+<%- include('../templates/header.ejs'); %>
+
+
+<body>
+  <div class="container-fluid dd">
+    <nav style="margin:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <a style="width: 1%;" href="/Notif"><img style="width: 100%;" src="../../images/notification.png"></a>
+          <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
+          <p class="nav-item nav-link">User Name</p>
+          <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
+
+        </div>
+      </nav>
+    <table style="display: none;" class="table table-bordered  table-bg">
+        <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Test Results</h1>
+        <tbody>
+            <tr>
+                <td class="hd" scope="row">Order ID</td>
+                <td class="hd">Name</td>
+                <td class="hd">Weight</td>
+                <td class="hd">Age</td>
+                <td class="hd">Last Donation since</td>
+                <td class="hd">Last Visit to Dentist</td>
+            </tr>
+
+            <tr>
+                <td scope="row">1</td>
+                <td>Ahmed Gamal</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+              
+
+            </tr>
+
+            <tr>
+                <td scope="row">2</td>
+                <td>Ahmed Mahmoud</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+              
+            </tr>
+
+
+            <tr>
+                <td scope="row">3</td>
+                <td>Omar Mohamed</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+              
+            </tr>
+        </tbody>
+    </table>
+
+    
+      <button style="width: 50%; margin-left: 25%; margin-top:1%" type="button" class="btn btn-danger"
+      data-toggle="modal" data-target="#DrTests" data-whatever="@mdo">Change Test Result</button>  
+
+    
+</div>
+
+<div class="modal fade" id="DrTests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Change Test Result</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="/Admin/DoctorTests" method="POST">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">OrderId</label>
+                    <input name="OrderIdTest" style="border: 1px solid rgba(77, 76, 76, 0.357); color: black" type="text"
+                        class="form-control" id="Location">
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">Result</label>
+                    <select style="border:1px solid rgba(77, 76, 76, 0.357); color: black;" onchange="UserChanged()" class="select email" name="Res" id="user">
+                      <option value="NULL">Result</option>
+                      <option value="CONFIRMED">CONFIRMED</option>
+                      <option value="REJECTED">REJECTED</option>
+                    </select>
+                </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger">Confirm</button>
+        </div>
+        </form>
+
+
+    </div>
+</div>
+</div>
+
+    <!-- //main -->
+</body>
+<%- include('../templates/footer.ejs'); %>

@@ -1,0 +1,173 @@
+<%- include('../templates/header.ejs'); %>
+
+
+	<body>
+		<!-- main -->
+		<div class="main-w3layouts wrapper">
+			<h1>Registration Form</h1>
+			<div class="main-agileinfo">
+				<div class="agileits-top">
+					<form action="/Register" method="post">
+						<select onchange="UserChanged()" class="select email" name="UserType" id="user">
+							<option value="NULL">UserType</option>
+							<option value="Donor">Donor</option>
+							<option value="Recipient">Recipient</option>
+							<option value="Organization">Organization</option>
+						</select>
+
+						<div style="display: none;" id="person">
+							<input class="text" type="text" name="SSN" placeholder="SSN" required="">
+							<input class="text" type="text" name="FirstName" placeholder="First Name" required="">
+							<input class="text" type="text" name="Minit" placeholder="Minit" required="">
+							<input class="text email" type="text" name="LastName" placeholder="Last Name" required="">
+							<input class="text email" type="email" name="email" placeholder="Email" required="">
+							<input class="text" type="password" name="password" placeholder="Password" required="">
+							<input class="text w3lpass" type="password" name="confirmPassword"
+								placeholder="Confirm Password" required="">
+
+							<select class="select" name="BloodGroup">
+								<option value="N/A">Blood Group</option>
+								<option value="N/A">Don't Know</option>
+								<option value="A+">A+</option>
+								<option value="A-">A-</option>
+								<option value="B+">B+</option>
+								<option value="B-">B-</option>
+								<option value="O+">O+</option>
+								<option value="O-">O-</option>
+								<option value="AB+">AB+</option>
+								<option value="AB-">AB-</option>
+							</select>
+
+							<select class="select email" name="Gender" id="">
+								<option value="Male">M</option>
+								<option value="Female">F</option>
+							</select>
+
+							<input class="text" type="text" name="Weight" placeholder="Weight" required="">
+
+							<input class="text" type="text" minlength="11" maxlength="11" name="PhoneNo" id=""
+								placeholder="Phone Number" required="">
+
+							<input class="text" type="text" name="age" placeholder="Age" required="">
+
+
+							<select class="select" name="Gov" id="">
+								<option value="NULL">Your Governorate</option>
+								<option value="Alexandria">Alexandria</option>
+								<option value="Aswan">Aswan</option>
+								<option value="Asyut">Asyut</option>
+								<option value="Beheira">Beheira</option>
+								<option value="Beni Suef">Beni Suef</option>
+								<option value="Cairo">Cairo</option>
+								<option value="Dakahlia">Dakahlia</option>
+								<option value="Damietta">Damietta</option>
+								<option value="Faiyum">Faiyum</option>
+								<option value="Gharbia">Gharbia</option>
+								<option value="Giza">Giza</option>
+								<option value="Ismailia">Ismailia</option>
+								<option value="Kafr el-Sheikh">Kafr el-Sheikh</option>
+								<option value="Matruh">Matruh</option>
+								<option value="Minya">Minya</option>
+								<option value="Monufia">Monufia</option>
+								<option value="New Valley">New Valley</option>
+								<option value="North Sinai">North Sinai</option>
+								<option value="Port Said">Port Said</option>
+								<option value="Qalyubia">Qalyubia</option>
+								<option value="Qena">Qena</option>
+								<option value="Red Sea">Red Sea</option>
+								<option value="Al Sharqia">Al Sharqia</option>
+								<option value="Sohag">Sohag</option>
+								<option value="South Sinai">South Sinai</option>
+								<option value="Suez">Suez</option>
+								<option value="Luxor">Luxor</option>
+							</select>
+
+							<input class="text" type="text" name="Address" placeholder="Your Address" required="">
+							<input type="submit" value="SIGNUP">
+					</form>
+
+				</div>
+
+				<div style="display: none;" id="organization">
+					<form action="/register" method="post">
+					<select onchange="UserChanged()" class="select email" name="UserType" id="user">
+						<option value="Organization">Organization</option>
+					</select>
+					<input class="text email" type="text" name="OrganizationName" placeholder="Organization Name"
+						required="">
+					<input class="text email" type="email" name="email" placeholder="Email" required="">
+					<input class="text" type="password" name="password" placeholder="Password" required="">
+					<input class="text w3lpass" type="password" name="password" placeholder="Confirm Password"
+						required="">
+					<input class="text" type="text" minlength="11" maxlength="11" name="PhoneNo" id=""
+						placeholder="Phone Number" required="">
+					<select class="select" name="Gov" id="">
+						<option value="NULL">Your Governorate</option>
+						<option value="Alexandria">Alexandria</option>
+						<option value="Aswan">Aswan</option>
+						<option value="Asyut">Asyut</option>
+						<option value="Beheira">Beheira</option>
+						<option value="Beni Suef">Beni Suef</option>
+						<option value="Cairo">Cairo</option>
+						<option value="Dakahlia">Dakahlia</option>
+						<option value="Damietta">Damietta</option>
+						<option value="Faiyum">Faiyum</option>
+						<option value="Gharbia">Gharbia</option>
+						<option value="Giza">Giza</option>
+						<option value="Ismailia">Ismailia</option>
+						<option value="Kafr el-Sheikh">Kafr el-Sheikh</option>
+						<option value="Matruh">Matruh</option>
+						<option value="Minya">Minya</option>
+						<option value="Monufia">Monufia</option>
+						<option value="New Valley">New Valley</option>
+						<option value="North Sinai">North Sinai</option>
+						<option value="Port Said">Port Said</option>
+						<option value="Qalyubia">Qalyubia</option>
+						<option value="Qena">Qena</option>
+						<option value="Red Sea">Red Sea</option>
+						<option value="Al Sharqia">Al Sharqia</option>
+						<option value="Sohag">Sohag</option>
+						<option value="South Sinai">South Sinai</option>
+						<option value="Suez">Suez</option>
+						<option value="Luxor">Luxor</option>
+					</select>
+
+					<input class="text" type="text" name="Address" placeholder="Your Address" required="">
+					<input type="submit" value="SIGNUP">
+					</form>
+				</div>
+
+
+				<div class="wthree-text">
+					<label class="anim">
+						<input type="checkbox" class="checkbox" required="">
+						<span>I Agree To The Terms & Conditions</span>
+					</label>
+					<div class="clear"> </div>
+				</div>
+
+
+				<p>Already have an Account? <a class="anchor" href="/login"> Login Now!</a></p>
+			</div>
+		</div>
+		<!-- copyright -->
+		<div class="colorlibcopy-agile">
+			<p>© Blood Bank </p>
+		</div>
+
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		</div>
+		<!-- //main -->
+	</body>
+	<%- include('../templates/footer.ejs'); %>

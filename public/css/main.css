@@ -1,0 +1,66 @@
+*{
+    background-image: url("../images/maxresdefault.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 24pt;
+    color: white;
+  
+  }
+  
+  h1{
+    background-image: url("");
+    font-size: 35px;
+    font-weight: 900;
+    background-color: transparent;
+  }
+  
+  p{
+    background-image: url("");
+    font-size: 25px;
+    font-weight: 100;
+    background-color: transparent;
+  }
+  
+  a{
+    text-decoration: none;
+  }
+  
+  .but{
+    background-color: white;
+    background-image: url("");
+    color:rgba(172, 16, 16, 0.876) ;
+    width: 300px;
+    border-radius: 10%;
+  }
+  
+  .but-2{
+    background-color: rgba(243, 24, 24, 0.876) ;;
+    background-image: url("");
+    color:white;
+    width: 300px;
+    margin-left: 5%;
+    border-radius: 10%;
+  }
+  
+  .row{
+    padding-top: 5%;
+    background-color: transparent;
+    background-image: url("");
+  }
+  
+  .col-6{
+    background-color: transparent;
+    background-image: url("");
+  }
+  
+  .hpimg{
+    background-color: transparent;
+    background-image: url("");
+    opacity: .7;
+  }
+  
+  .logo{
+    background-image: url("");
+    background-color: transparent;
+  }

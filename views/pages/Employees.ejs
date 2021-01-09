@@ -1,0 +1,105 @@
+<%- include('../templates/header.ejs'); %>
+
+    <body>
+        <div class="container-fluid dd">
+            <nav style="margin-bottom:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Admin">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <a style="width: 1%;" href="/Notif"><img style="width: 100%;"
+                            src="../../images/notification.png"></a>
+                    <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
+                    <p class="nav-item nav-link">
+                        <%=UserName%>
+                    </p>
+                    <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
+
+                </div>
+            </nav>
+            <table style="display: none;" class="table table-bordered  table-bg">
+                <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;"><%=h%></h1>
+                <tbody>
+                    <tr>
+                        <td class="hd">SSN</td>
+                        <td class="hd">Name</td>
+                        <td class="hd">Age</td>
+                        <td class="hd">Gender</td>
+                        <td class="hd">Phone Number</td>
+                        <td class="hd">Salary</td>
+                    </tr>
+                    <%Emps.forEach(row=>{%>
+                        <tr>
+                            <td>
+                                <%=row.SSN%>
+                            </td>
+                            <td scope="row">
+                                <%=row.Fname%> <%=row.Lname%>
+                            </td>
+                            <td>
+                                <%=row.Age%>
+                            </td>
+                            <td>
+                                <%=row.Gender%>
+                            </td>
+                            <td>
+                                <%=row.Phone_Num%>
+                            </td>
+                            <td>
+                                <%=row.Salary%>
+                            </td>
+                        </tr>
+                        <% });%>
+                </tbody>
+            </table>
+            
+
+            <form action="">
+                <button style="width: 50%; margin-left: 25%;" type="button" class="btn btn-danger" data-toggle="modal"
+                    data-target="#Salary" data-whatever="@mdo">Change Salary Of Specific <%=h%></button>
+            </form>
+</div>
+            <div class="modal fade" id="Salary" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Change Salary</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/Admin/Branches" method="POST">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">SSN</label>
+                                <input name="SSN<%=h%>" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text"
+                                    class="form-control" id="Location">
+
+                                    <label for="recipient-name" class="col-form-label">Salary</label>
+                                    <input name="Salary<%=h%>" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text"
+                                        class="form-control" id="Location">
+                            </div>
+                           
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Apply</button>
+                    </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </body>
+<%- include('../templates/footer.ejs'); %>

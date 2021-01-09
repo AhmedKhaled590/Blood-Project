@@ -1,0 +1,81 @@
+<%- include('../templates/header.ejs'); %>
+<style>
+  .fadeIn{
+    transition-duration: 100s;
+  }
+</style>
+  <body>
+    <div class="container-fluid dd animated fadeIn">
+      <nav style="margin:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <a style="width: 1%;" href="/Notif"><img style="width: 100%;" src="../../images/notification.png"></a>
+          <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
+          <p class="nav-item nav-link">User Name</p>
+          <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
+
+        </div>
+      </nav>
+      <table class="table table-bordered animated fadeInDownBig table-bg">
+        <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Change\Cancel Appointenent</h1>
+        <tbody>
+          <tr>
+            <td class="hd" scope="row">Order ID</td>
+            <td class="hd">Appointement</td>
+            <td class="hd">Action</td>
+          </tr>
+
+          <tr>
+            <td scope="row">1</td>
+            <td scope="row">2020-08-08</td>
+            <td><button style="font-size: 30px; background-color: rgb(102, 5, 5); color:white; display: inline;padding: 15px;" class="btn btn- ">Change an
+                appointement</button>
+              <button style="font-size: 30px;display: inline;margin-left: 50px; padding: 15px;"
+                class="btn btn-danger ">Cancel an
+                appointement</button>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td scope="row">2</td>
+            <td scope="row">2020-08-08</td>
+            <td><button style="font-size: 30px; background-color: rgb(102, 5, 5); color:white; display: inline;padding: 15px;" class="btn btn- ">Change an
+                appointement</button>
+              <button style="font-size: 30px;display: inline;margin-left: 50px; padding: 15px;"
+                class="btn btn-danger ">Cancel an
+                appointement</button>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td scope="row">3</td>
+            <td scope="row">2020-08-08</td>
+            <td><button style="font-size: 30px; background-color: rgb(102, 5, 5); color:white; display: inline;padding: 15px;" class="btn btn- ">Change an
+                appointement</button>
+              <button style="font-size: 30px;display: inline;margin-left: 50px; padding: 15px;"
+                class="btn btn-danger ">Cancel an
+                appointement</button>
+            </td>
+
+
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+
+
+  </body>
+  <%- include('../templates/footer.ejs'); %>

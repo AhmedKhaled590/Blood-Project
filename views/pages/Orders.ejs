@@ -1,0 +1,135 @@
+<%- include('../templates/header.ejs'); %>
+
+    <body>
+        <div class="container-fluid dd">
+            <nav class="nav">
+                <div class="container">
+                    <div class="logo">
+                        <a href="/">Blood Bank</a>
+                    </div>
+                    <div id="mainListDiv" class="main_list">
+                        <ul class="navlinks">
+                            <li><a>Admin Panel</a></li>
+                        </ul>
+                    </div>
+                    <span class="navTrigger">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </span>
+                </div>
+            </nav>
+            <table style="display: none;" class="table table-bordered  table-bg">
+                <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Patients Orders</h1>
+                <tbody>
+                    <tr>
+                        <td class="hd" scope="row">Order ID</td>
+                        <td class="hd">Name</td>
+                        <td class="hd">Blood Group</td>
+                        <td class="hd">Required Amount</td>
+                        <td class="hd">Date Of Request</td>
+                    </tr>
+                    <%pateint.forEach(rec=>{%>
+                    <tr>
+                        <td scope="row"><%=rec.Order_ID%></td>
+                        <td><%=rec.Fname%></td>
+                        <td><%=rec.Blood_Type%></td>
+                        <td><%=rec.Req_Amount%></td>
+                        <td><%=rec.Req_Date%></td>
+
+                    </tr>
+                    <%})%>
+                </tbody>
+            </table>
+            <table style="display: none;" class="table table-bordered  table-bg">
+                <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Organizations Orders</h1>
+                <tbody>
+                    <tr>
+                        <td class="hd" scope="row">Order ID</td>
+                        <td class="hd">Organization Name</td>
+                        <td class="hd">Blood Group</td>
+                        <td class="hd">Required Amount</td>
+                        <td class="hd">Date Of Request</td>
+                    </tr>
+                    <%orgz.forEach(rec=>{%>
+                    <tr>
+                        <td scope="row"><%=rec.Order_ID%></td>
+                        <td><%=rec.O_name%></td>
+                        <td><%=rec.Blood_Type%></td>
+                        <td><%=rec.Req_Amount%></td>
+                        <td><%=rec.Req_Date%></td>
+
+                    </tr>
+                    <%})%>
+                </tbody>
+            </table>
+              
+            <button style=" width: 25%; font-size: 30px;margin-left: 15%; margin-top: 1%;" type="button" class="btn btn-danger" data-toggle="modal"
+                data-target="#Check" data-whatever="@mdo">Check availability</button>
+            <button style="width: 25%; margin-left: 20%; font-size: 30px; margin-top: 1%;" type="button" class="btn btn-danger" data-toggle="modal"
+                data-target="#Confirm" data-whatever="@mdo">Response To specific order</button>
+        </div>
+
+        <div class="modal fade" id="Check" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Check availability of Blood Amount</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/Admin/Orders" method="POST">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">OrderId</label>
+                                <input name="OrderId" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text"
+                                    class="form-control" id="Location">
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Check</button>
+                    </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="Confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Response to Order</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/Admin/Orders" method="POST">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">OrderId</label>
+                                <input name="OrderIdRes" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text"
+                                    class="form-control" id="Location">
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Confirm</button>
+                    </div>
+                    </form>
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+    <%- include('../templates/footer.ejs'); %>

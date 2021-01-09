@@ -1,0 +1,103 @@
+<%- include('../templates/header.ejs'); %>
+    <script src="../../routes/Admin.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
+
+    <body>
+        <div class="container-fluid dd">
+            <nav class="nav">
+                <div class="container">
+                    <div class="logo">
+                        <a href="/">Blood Bank</a>
+                    </div>
+                    <div id="mainListDiv" class="main_list">
+                        <ul class="navlinks">
+                            <li><a>Admin Panel</a></li>
+                        </ul>
+                    </div>
+                    <span class="navTrigger">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </span>
+                </div>
+            </nav>
+            <table style="display: none;" class="table table-bordered  table-bg">
+                <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Statistics</h1>
+                <tbody>
+                    <tr>
+                        <td class="hd" scope="row">Total Available samples</td>
+                        <td scope="row">
+                            <%=numdon%>
+                        </td>
+                    </tr>
+    
+                    <%samples.forEach(sample=>{%>
+                        <tr>
+                            <td class="hd" scope="row">Number Of <%=sample.Blood_Type%> Samples</td>
+                            <td scope="row">
+                                <%=sample.n%>
+                            </td>
+                        </tr>
+                        <%})%>
+                </tbody>
+            </table>
+            <table style="display: none;" class="table table-bordered  table-bg">
+                <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Most Donor</h1>
+                <tbody>
+    
+                    <tr>
+                        <td class="hd" scope="row">
+                            SSN
+                        </td>
+                        <td class="hd" scope="row">
+                            Fname
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td scope="row">
+                            <%=donor.SSN%>
+                        </td>
+                        <td scope="row">
+                            <%=donor.Fname%>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+            <table style="display: none;" class="table table-bordered  table-bg">
+                <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Inventory</h1>
+                <tbody>
+                    <tr>
+                        <td class="hd" scope="row">Sample ID</td>
+                        <td class="hd">Donor</td>
+                        <td class="hd">Blood Group</td>
+                        <td class="hd">Date Of Donation</td>
+                    </tr>
+
+
+                    <%Inventory.forEach(row=>{%>
+                        <tr>
+                            <td scope="row">
+                                <%=row.Sample_ID%>
+                            </td>
+                            <td>
+                                <%=row.Fname%>
+                            </td>
+                            <td>
+                                <%=row.Blood_Type%>
+                            </td>
+                            <td>
+                                <%=row.DONATION_DATE%>
+                            </td>
+                        </tr>
+                        <%});%>
+                </tbody>
+            </table>
+         
+        </div>
+
+    </body>
+    <%- include('../templates/footer.ejs'); %>

@@ -1,0 +1,107 @@
+<%- include('../templates/header.ejs'); %>
+
+
+  <body>
+    <div id="circle">
+      <div class="loader">
+        <div class="loader">
+          <div class="loader">
+            <div class="loader">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: none;" class="container-fluid dd">
+
+      <nav style="margin:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <a style="width: 1%;" href="/Notif"><img style="width: 100%;" src="../../images/notification.png"></a>
+          <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
+          <p class="nav-item nav-link"><%= (typeof UserName !== 'undefined') ? UserName : 'User Name' %></p>
+          <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
+
+        </div>
+      </nav>
+
+
+
+
+
+      <div style="display: none;" class="container-fluid btns d-flex flex-row justify-content-center">
+        <div class="row">
+          <div class="col-4 col-md-6 ">
+            <a href="/HReq" class="req btn btn-request btn-circle btn-circle-xl m-1"><img style="width: 30%;"
+                src="images/bloodPoint.png"><span class="req">Requset Blood</span></a>
+          </div>
+
+          <div class="col-4 col-md-6 ">
+            <a href="/Donate" class="req btn btn-request btn-circle btn-circle-xl m-1"><img style="width: 30%;"
+                src="images/bloodPoint.png"><span class="req">Donate</span></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 col-md-6">
+            <a href="/Home/Tests" class="req btn btn-request btn-circle btn-circle-xl m-1"><img style="width: 30%;"
+                src="images/blood-test.png"><span class="req">Test Results</span></a>
+          </div>
+          <div class="row">
+            <div class="col-4 col-md-6">
+              <a href="/Home/changeappointment" class="req btn btn-request btn-circle btn-circle-xl m-1"><img
+                  style="width: 30%;" src="images/hourglass.png"><span style="font-size:30px;" class="req">Change
+                  Appointement</span></a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <table style="display: none;" class="table table-bordered table-bg">
+        <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Total Donations today</h1>
+        <tbody>
+          <tr>
+            <td class="hd" scope="row">A+</td>
+            <td class="hd">A-</td>
+            <td class="hd">AB+</td>
+            <td class="hd">AB-</td>
+          </tr>
+          <tr>
+            <td scope="row"><%= (typeof countApos !== 'undefined') ? countApos : 0 %></td>
+            <td><%= (typeof countAneg !== 'undefined') ? countAneg : '0' %></td>
+            <td><%= (typeof countABpos !== 'undefined') ? countABpos : '0' %></td>
+            <td><%= (typeof countABneg !== 'undefined') ? countABneg : '0' %></td>
+          </tr>
+          <tr>
+            <td class="hd" scope="row">B+</td>
+            <td class="hd">B-</td>
+            <td class="hd">O+</td>
+            <td class="hd">O-</td>
+          </tr>
+          <tr>
+            <td scope="row"><%= (typeof countBpos !== 'undefined') ? countBpos : '0' %></td>
+            <td><%= (typeof countBneg !== 'undefined') ? countBneg : '0' %></td>
+            <td><%= (typeof countOpos !== 'undefined') ? countOpos : '0' %></td>
+            <td><%= (typeof countOneg !== 'undefined') ? countOneg : '0' %></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+  </body>
+  <script>
+
+  </script>
+  <%- include('../templates/footer.ejs'); %>

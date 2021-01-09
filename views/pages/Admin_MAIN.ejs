@@ -1,0 +1,72 @@
+<%- include('../templates/header.ejs'); %>
+
+    <body>
+
+        <div class="container-fluid dd">
+            <nav style="margin-bottom:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Admin">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <a style="width: 1%;" href="/Notif"><img style="width: 100%;"
+                            src="../../images/notification.png"></a>
+                    <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
+                    <p class="nav-item nav-link">
+                        <%=UserName%>
+                    </p>
+                    <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
+
+                </div>
+            </nav>
+            <div style="display: none;" class="container-fluid btns d-flex flex-row justify-content-center">
+                <div class="row">
+                    <div class="col-4 col-md-6 ">
+                        <a href="/Admin/Don" class="req btn btn-request btn-circle btn-circle-xl  ml-1"><img
+                                style="width: 30%;" src="images/bloodPoint.png"><span class="req">Requests</span></a>
+                    </div>
+                    <div class="col-4 col-md-6 ">
+                        <a href="/Admin/Inventory" class="req btn btn-request btn-circle btn-circle-xl ml-1 "><img
+                                style="width: 30%;" src="images/storage.png"><span class="req">Inventory</span></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4 col-md-6">
+                        <a href="/Admin/Tests" class="req btn btn-request btn-circle btn-circle-xl ml-1"><img
+                                style="width: 30%;" src="images/blood-test.png"><span class="req">Test
+                                Results</span></a>
+                    </div>
+                    <div class="col-4 col-md-6">
+                        <a href="/Admin/Branches" class="req btn btn-request btn-circle btn-circle-xl ml-1"><img
+                                style="width: 30%;" src="images/Branch.png"><span class="req">Branches</span></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 col-md-6">
+                        <a href="/Admin/DonRecords" class="req btn btn-request btn-circle btn-circle-xl ml-1"><img
+                                style="width: 30%;" src="images/records.png"><span class="req">Donation Records</span></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4 col-md-6">
+                        <a href="/Admin/orders" class="req btn btn-request btn-circle btn-circle-xl ml-1"><img
+                                style="width: 30%;" src="images/order.png"><span class="req">Orders</span></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+
+
+    </body>
+    <%- include('../templates/footer.ejs'); %>

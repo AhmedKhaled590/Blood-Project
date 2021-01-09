@@ -1,0 +1,64 @@
+<%- include('../templates/header.ejs'); %>
+<body>
+     <nav style="margin:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <a style="width: 1%;" href="/Notif"><img style="width: 100%;" src="../../images/notification.png"></a>
+          <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
+          <p class="nav-item nav-link">User Name</p>
+          <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
+
+        </div>
+      </nav>
+    <!-- main -->
+    <div class="main-w3layouts wrapper">
+        <h1>Request Blood</h1>
+        <div class="main-agileinfo">
+            <div class="agileits-top">
+                <form action="#" method="post">
+                    <select class="select" name="BloodGroup">
+                        <option value="N/A">Blood Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                    <input style="width: 99%;" type="text" placeholder="Quantity">
+                    <input type="submit" value="Request">
+                </form>
+            </div>
+        </div>
+        <!-- copyright -->
+        <div class="colorlibcopy-agile">
+            <p>© Blood Bank </p>
+        </div>
+        <!-- //copyright -->
+        <ul class="colorlib-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <!-- //main -->
+</body>
+<%- include('../templates/footer.ejs'); %>

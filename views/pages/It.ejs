@@ -1,0 +1,70 @@
+<%- include('../templates/header.ejs'); %>
+
+
+	<body>
+		<!-- main -->
+		<div class="main-w3layouts wrapper animated fadeInDownBig">
+			<h1>Add Doctor/Employee</h1>
+			<div class="main-agileinfo">
+				<div class="agileits-top">
+					<form action="#" method="post">
+						<select onchange="UserChanged()" class="select email" name="UserType" id="user">
+							<option value="NULL">Type</option>
+							<option value="Donor">Doctor</option>
+							<option value="Recipient">Employee</option>
+						</select>
+
+						<div>
+
+							<input class="text" type="text" name="SSN" placeholder="SSN" required="" maxlength="14">
+							<input class="text" type="text" name="FirstName" placeholder="First Name" required="">
+							<input class="text" type="text" name="Minit" placeholder="Minit" required="">
+							<input class="text email" type="text" name="LastName" placeholder="Last Name" required="">
+							<input class="text email" type="email" name="email" placeholder="Email" required="">
+							<input class="text" type="password" name="password" placeholder="Password" required="">
+							<input class="text w3lpass" type="password" name="password" placeholder="Confirm Password"
+								required="">
+
+
+							<select class="select email" name="Gender" id="">
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+							</select>
+
+
+							<input class="text" type="text" minlength="11" maxlength="11" name="PhoneNo" id=""
+								placeholder="Phone Number" required="">
+
+							<input style="margin-top: 5px;" type="text" name="age" id="age" placeholder="Age">
+
+
+
+
+							<input class="text" type="text" name="Address" placeholder="Address" required="">
+						</div>
+
+				<input type="submit" value="ADD">
+				</form>
+			</div>
+		</div>
+		<!-- copyright -->
+		<div class="colorlibcopy-agile">
+			<p>© Blood Bank </p>
+		</div>
+
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		</div>
+		<!-- //main -->
+	</body>
+	<%- include('../templates/footer.ejs'); %>

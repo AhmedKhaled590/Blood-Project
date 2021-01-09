@@ -1,0 +1,123 @@
+<%- include('../templates/header.ejs'); %>
+
+<body>
+    <div class="container-fluid dd">
+        <nav style="margin-bottom:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Admin">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <a style="width: 1%;" href="/Notif"><img style="width: 100%;"
+                        src="../../images/notification.png"></a>
+                <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
+                <p class="nav-item nav-link"><%=UserName%></p>
+                <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
+
+            </div>
+        </nav>
+        <button style="width: 50%; margin-left: 25%; font-size: 40px; margin-top:1%" type="button" class="btn btn-danger"
+        data-toggle="modal" data-target="#AddSample" data-whatever="@mdo">Add New Sample</button>
+        <table style="display: none;" class="table table-bordered  table-bg">
+            <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Donations Records</h1>
+            <tbody>
+                <tr>
+                    <td class="hd">Sample ID</td>
+                    <td class="hd">SSN</td>
+                    <td class="hd">Name</td>
+                    <td class="hd">Blood Group</td>
+                    <td class="hd">Number Of Donations</td>                    
+                </tr>
+                <%Donations.forEach(row=>{%>
+                <tr>
+                    <td><%=row.Sample_ID%></td>
+                    <td  scope="row"><%=row.SSN%></td>
+                    <td><%=row.Fname%></td>
+                    <td><%=row.Blood_Type%></td>
+                    <td><%=row.n%></td>
+                </tr>
+                <% });%>
+            </tbody>
+        </table>
+        <table style="display: none;" class="table table-bordered  table-bg">
+            <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Statistics</h1>
+            <tbody>
+                <tr>
+                    <td class="hd" scope="row">Number Of Donations</td>
+                    <td scope="row">
+                        <%=numdon%>
+                    </td>
+                </tr>
+
+                <%samples.forEach(sample=>{%>
+                    <tr>
+                        <td class="hd" scope="row">Number Of <%=sample.Blood_Type%> Samples</td>
+                        <td scope="row">
+                            <%=sample.n%>
+                        </td>
+                    </tr>
+                    <%})%>
+            </tbody>
+        </table>
+        <table style="display: none;" class="table table-bordered  table-bg">
+            <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Most Donor</h1>
+            <tbody>
+
+                <tr>
+                    <td class="hd" scope="row">
+                        SSN
+                    </td>
+                    <td class="hd" scope="row">
+                        Fname
+                    </td>
+                </tr>
+
+                <tr>
+                    <td scope="row">
+                        <%=donor.SSN%>
+                    </td>
+                    <td scope="row">
+                        <%=donor.Fname%>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="modal fade" id="AddSample" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Sample</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Admin/Branches" method="POST">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">RequestId</label>
+                        <input name="RequestId" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text"
+                            class="form-control" id="Location">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Add Sample</button>
+            </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+<%- include('../templates/footer.ejs'); %>
