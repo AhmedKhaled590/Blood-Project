@@ -12,7 +12,7 @@ db.each('SELECT fname FROM donor where logged =1', function (err, user) {
 
 
 router.get('/', function (req, res, next) {
-    res.render('pages/Admin_MAIN', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", UserName: User.Fname })
+  res.render('pages/Admin_MAIN', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", UserName: User.Fname })
 
 });
 
@@ -71,7 +71,7 @@ router.post('/Tests', function (req, res, next) {
   var SSN = req.body.SSN;
   var Don_date = req.body.DONDATE;
   db.all(' UPDATE DONOR SET Notification = "Your Donation date is Set" WHERE SSN  = ? ', [SSN], (er) => {
-    if(er)console.log(er);
+    if (er) console.log(er);
     db.all('update Donation_requests set DETERMINED_DATE = ? WHERE SSN = ?', [Don_date, SSN], function (err) {
       if (err) console.log(err);
       else {
@@ -86,11 +86,91 @@ router.post('/Tests', function (req, res, next) {
 
 
 router.get('/Orders', function (req, res, next) {
-  db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID",(err,pat)=>{
-    db.all("select*from org_order R,ORGANIZATIONS O WHERE R.ORG_ID=O.O_ID",(err,org)=>{
-      res.render('pages/Orders', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "home",pateint:pat,orgz:org })
+  db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID", (err, pat) => {
+    db.all("select*from org_order R,ORGANIZATIONS O WHERE R.ORG_ID=O.O_ID", (err, org) => {
+      res.render('pages/Orders', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "home", pateint: pat, orgz: org })
     })
   })
+});
+router.post('/Orders', function (req, res, next) {
+  var orderIdOrd = req.body.OrderId;
+  var orderIdResOrd = req.body.OrderIdRes;
+  var orderIdOrg = req.body.OrderIdOrg;
+  var orderIdResOrg = req.body.OrderIdResOrg;
+
+  if (orderIdOrd != undefined) {
+    db.all("SELECT * FROM PATIENT_ORDER WHERE ORDER_ID = ?", [orderIdOrd], (err, requ) => {
+      db.all("select count(Blood_Type) as avail from inventory where BLOOD_TYPE=?", [requ[0].Blood_Type], (err, s) => {
+        if (s[0].avail >= requ[0].Req_Amount) {
+          db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID", (err, pat) => {
+            db.all("select*from org_order R,ORGANIZATIONS O WHERE R.ORG_ID=O.O_ID", (err, org) => {
+              res.render('pages/Orders', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "home", pateint: pat, orgz: org, msg: "Required Order is in Inventory" })
+            })
+          })
+        }
+        else {
+          db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID", (err, pat) => {
+            db.all("select*from org_order R,ORGANIZATIONS O WHERE R.ORG_ID=O.O_ID", (err, org) => {
+              res.render('pages/Orders', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "home", pateint: pat, orgz: org, msg: "Required Order is NOT available Now in Inventory" })
+            })
+          })
+        }
+      })
+    })
+
+  }
+
+  else if (orderIdOrg != undefined) {
+    db.all("SELECT * FROM Org_Order WHERE ORDER_ID = ?", [orderIdOrg], (err, requ) => {
+      db.all("select count(Blood_Type) as avail from inventory where BLOOD_TYPE=?", [requ[0].Blood_Type], (err, s) => {
+        if (s[0].avail >= requ[0].Req_Amount) {
+          db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID", (err, pat) => {
+            db.all("select*from org_order R,ORGANIZATIONS O WHERE R.ORG_ID=O.O_ID", (err, org) => {
+              res.render('pages/Orders', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "home", pateint: pat, orgz: org, msg: "Required Order is in Inventory" })
+            })
+          })
+        }
+        else {
+          db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID", (err, pat) => {
+            db.all("select*from org_order R,ORGANIZATIONS O WHERE R.ORG_ID=O.O_ID", (err, org) => {
+              res.render('pages/Orders', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "home", pateint: pat, orgz: org, msg: "Required Order is NOT available Now in Inventory" })
+            })
+          })
+        }
+      })
+    })
+  }
+
+  else if (orderIdResOrd != undefined) {
+    db.all("SELECT * FROM PATIENT_ORDER WHERE ORDER_ID = ?", [orderIdResOrd], (err, requ) => {
+      db.all("DELETE FROM INVENTORY WHERE Blood_Type= ? AND Sample_ID IN (SELECT Sample_ID FROM INVENTORY WHERE Blood_Type= ? limit ?)", [requ[0].Blood_Type, requ[0].Blood_Type, requ[0].Req_Amount], (err) => {
+        db.all("DELETE FROM PATIENT_ORDER WHERE ORDER_ID = ? ", [orderIdResOrd], (err) => {
+          if (err) console.log(err);
+          db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID", (err, pat) => {
+            db.all("select*from org_order R,ORGANIZATIONS O WHERE R.ORG_ID=O.O_ID", (err, org) => {
+              res.render('pages/Orders', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "home", pateint: pat, orgz: org })
+            })
+          })
+        })
+      })
+    })
+  }
+
+  else if (orderIdResOrg != undefined) {
+    db.all("SELECT * FROM Org_order WHERE ORDER_ID = ?", [orderIdResOrg], (err, requ) => {
+      db.all("DELETE FROM INVENTORY WHERE Blood_Type= ? AND Sample_ID IN (SELECT Sample_ID FROM INVENTORY WHERE Blood_Type= ? limit ?)", [requ[0].Blood_Type, requ[0].Blood_Type, requ[0].Req_Amount], (err) => {
+        db.all("DELETE FROM org_order WHERE ORDER_ID = ? ", [orderIdResOrg], (err) => {
+          if (err) console.log(err);
+          db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID", (err, pat) => {
+            db.all("select*from org_order R,ORGANIZATIONS O WHERE R.ORG_ID=O.O_ID", (err, org) => {
+              res.render('pages/Orders', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "home", pateint: pat, orgz: org })
+            })
+          })
+        })
+      })
+    })
+  }
+
 });
 
 

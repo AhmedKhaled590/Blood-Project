@@ -19,6 +19,16 @@
                     </span>
                 </div>
             </nav>
+            <%if (typeof msg != 'undefined'){%>
+            <div style="font-size: 30px;" class="alert alert-danger">
+                <div class="container">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                    </button>
+                    <span><%=msg%></span>
+                </div>
+            </div>
+        <%}%>
             <table style="display: none;" class="table table-bordered  table-bg">
                 <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Patients Orders</h1>
                 <tbody>
@@ -30,19 +40,37 @@
                         <td class="hd">Date Of Request</td>
                     </tr>
                     <%pateint.forEach(rec=>{%>
-                    <tr>
-                        <td scope="row"><%=rec.Order_ID%></td>
-                        <td><%=rec.Fname%></td>
-                        <td><%=rec.Blood_Type%></td>
-                        <td><%=rec.Req_Amount%></td>
-                        <td><%=rec.Req_Date%></td>
+                        <tr>
+                            <td scope="row">
+                                <%=rec.Order_ID%>
+                            </td>
+                            <td>
+                                <%=rec.Fname%>
+                            </td>
+                            <td>
+                                <%=rec.Blood_Type%>
+                            </td>
+                            <td>
+                                <%=rec.Req_Amount%>
+                            </td>
+                            <td>
+                                <%=rec.Req_Date%>
+                            </td>
 
-                    </tr>
-                    <%})%>
+                        </tr>
+                        <%})%>
                 </tbody>
             </table>
+            <button style=" width: 25%; font-size: 30px;margin-left: 15%; margin-top: 1%;" type="button"
+                class="btn btn-danger" data-toggle="modal" data-target="#Check1" data-whatever="@mdo">Check
+                availability</button>
+            <button style="width: 25%; margin-left: 20%; font-size: 30px; margin-top: 1%;" type="button"
+                class="btn btn-danger" data-toggle="modal" data-target="#Confirm1" data-whatever="@mdo">Response To
+                specific order</button>
+
             <table style="display: none;" class="table table-bordered  table-bg">
-                <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Organizations Orders</h1>
+                <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Organizations Orders
+                </h1>
                 <tbody>
                     <tr>
                         <td class="hd" scope="row">Order ID</td>
@@ -52,23 +80,99 @@
                         <td class="hd">Date Of Request</td>
                     </tr>
                     <%orgz.forEach(rec=>{%>
-                    <tr>
-                        <td scope="row"><%=rec.Order_ID%></td>
-                        <td><%=rec.O_name%></td>
-                        <td><%=rec.Blood_Type%></td>
-                        <td><%=rec.Req_Amount%></td>
-                        <td><%=rec.Req_Date%></td>
+                        <tr>
+                            <td scope="row">
+                                <%=rec.Order_ID%>
+                            </td>
+                            <td>
+                                <%=rec.O_name%>
+                            </td>
+                            <td>
+                                <%=rec.Blood_Type%>
+                            </td>
+                            <td>
+                                <%=rec.Req_Amount%>
+                            </td>
+                            <td>
+                                <%=rec.Req_Date%>
+                            </td>
 
-                    </tr>
-                    <%})%>
+                        </tr>
+                        <%})%>
                 </tbody>
             </table>
-              
-            <button style=" width: 25%; font-size: 30px;margin-left: 15%; margin-top: 1%;" type="button" class="btn btn-danger" data-toggle="modal"
-                data-target="#Check" data-whatever="@mdo">Check availability</button>
-            <button style="width: 25%; margin-left: 20%; font-size: 30px; margin-top: 1%;" type="button" class="btn btn-danger" data-toggle="modal"
-                data-target="#Confirm" data-whatever="@mdo">Response To specific order</button>
+
+            <button style=" width: 25%; font-size: 30px;margin-left: 15%; margin-top: 1%;" type="button"
+                class="btn btn-danger" data-toggle="modal" data-target="#Check" data-whatever="@mdo">Check
+                availability</button>
+            <button style="width: 25%; margin-left: 20%; font-size: 30px; margin-top: 1%;" type="button"
+                class="btn btn-danger" data-toggle="modal" data-target="#Confirm" data-whatever="@mdo">Response To
+                specific order</button>
         </div>
+
+        <div class="modal fade" id="Check1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Check availability of Blood Amount</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/Admin/Orders" method="POST">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">OrderId</label>
+                                <input name="OrderId" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text"
+                                    class="form-control" id="Location">
+
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Check</button>
+                    </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="Confirm1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Response to Order</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/Admin/Orders" method="POST">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">OrderId</label>
+                                <input name="OrderIdRes" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text"
+                                    class="form-control" id="Location">
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Confirm</button>
+                    </div>
+                    </form>
+
+
+                </div>
+            </div>
+
+        </div>
+
+
 
         <div class="modal fade" id="Check" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -84,7 +188,7 @@
                         <form action="/Admin/Orders" method="POST">
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">OrderId</label>
-                                <input name="OrderId" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text"
+                                <input name="OrderIdOrg" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text"
                                     class="form-control" id="Location">
                             </div>
 
@@ -114,8 +218,8 @@
                         <form action="/Admin/Orders" method="POST">
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">OrderId</label>
-                                <input name="OrderIdRes" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text"
-                                    class="form-control" id="Location">
+                                <input name="OrderIdResOrg" style="border: 1px solid rgba(77, 76, 76, 0.357);"
+                                    type="text" class="form-control" id="Location">
                             </div>
 
                     </div>
