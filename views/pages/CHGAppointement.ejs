@@ -1,9 +1,10 @@
 <%- include('../templates/header.ejs'); %>
-<style>
-  .fadeIn{
-    transition-duration: 100s;
-  }
-</style>
+  <style>
+    .fadeIn {
+      transition-duration: 100s;
+    }
+  </style>
+
   <body>
     <div class="container-fluid dd animated fadeIn">
       <nav style="margin:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
@@ -33,49 +34,82 @@
             <td class="hd">Appointement</td>
             <td class="hd">Action</td>
           </tr>
-
+          <%if (typeof res!='undefined'){%>
           <tr>
-            <td scope="row">1</td>
-            <td scope="row">2020-08-08</td>
-            <td><button style="font-size: 30px; background-color: rgb(102, 5, 5); color:white; display: inline;padding: 15px;" class="btn btn- ">Change an
-                appointement</button>
-              <button style="font-size: 30px;display: inline;margin-left: 50px; padding: 15px;"
-                class="btn btn-danger ">Cancel an
-                appointement</button>
+            <td scope="row"><%=res.ID%></td>
+            <td scope="row"><%=res.DETERMINED_DATE%></td>
+            <td>
+              <button
+                style="font-size: 30px; background-color: rgb(102, 5, 5); color:white; display: inline;padding: 15px;"
+                type="button" class="btn btn-danger" data-toggle="modal" data-target="#Change"
+                data-whatever="@mdo">Change Appointement</button>
+              <button
+                style="font-size: 30px; background-color: rgb(102, 5, 5); color:white; display: inline;padding: 15px;"
+                type="button" class="btn btn-danger" data-toggle="modal" data-target="#Cancel"
+                data-whatever="@mdo">Cancel Appointement</button>
             </td>
 
           </tr>
-
-          <tr>
-            <td scope="row">2</td>
-            <td scope="row">2020-08-08</td>
-            <td><button style="font-size: 30px; background-color: rgb(102, 5, 5); color:white; display: inline;padding: 15px;" class="btn btn- ">Change an
-                appointement</button>
-              <button style="font-size: 30px;display: inline;margin-left: 50px; padding: 15px;"
-                class="btn btn-danger ">Cancel an
-                appointement</button>
-            </td>
-
-          </tr>
-
-          <tr>
-            <td scope="row">3</td>
-            <td scope="row">2020-08-08</td>
-            <td><button style="font-size: 30px; background-color: rgb(102, 5, 5); color:white; display: inline;padding: 15px;" class="btn btn- ">Change an
-                appointement</button>
-              <button style="font-size: 30px;display: inline;margin-left: 50px; padding: 15px;"
-                class="btn btn-danger ">Cancel an
-                appointement</button>
-            </td>
-
-
-          </tr>
+        <%}%>
         </tbody>
       </table>
 
 
     </div>
+    <div style="font-size:30px ;" class="modal fade" id="Change" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 style="font-size:35px ;" class="modal-title" id="exampleModalLabel">Change Appointement</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/Home/changeappointment" method="POST">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Are you sure you want to request changing your
+                  date?</label>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger">Request</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
+
+    <div style="font-size:30px ;" class="modal fade" id="Cancel" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 style="font-size:35px ; class=" modal-title" id="exampleModalLabel">Cancel Appointement</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/Home/changeappointment" method="POST">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Are you sure you want to cancel your date?</label>
+                <input type="text" name="cancel" value="canc" style="display: none;">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger">Request</button>
+          </div>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
 
   </body>
   <%- include('../templates/footer.ejs'); %>
