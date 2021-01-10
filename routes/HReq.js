@@ -26,7 +26,6 @@ router.post('/', async(req, res) =>{
         if (err || rows[0] == undefined ) 
         {
           console.log(err +  "\n\n\n\n\n\n  No Orgaization is logged  \n\n\n\n\n\n"); 
-          return res.render('pages/HReq',{title:"Blood Bank",css1:"reg",css2:"Preq",css3:"animate",scrp:"reg", isLogged :0})
         }
         else 
           {
@@ -45,12 +44,39 @@ router.post('/', async(req, res) =>{
                 return res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home" ,isLogged:1})
               })
 
-          }  
-        })
-        
-          
-          // console.log(` my id is ${ID}  `)
-          // console.log(`\n\n\n\\n\n  out scobe my id is ${ID}  \n\n\n\\n\n  `)
+            }  
+          })
+
+          var patient =` select SSN from patient WHERE LOGGED =1 `;
+          let ssn ;
+          db.all(patient, 
+            (err,rows) => {
+              if (err || rows[0] == undefined ) 
+              {
+                console.log(err +  "\n\n\n\n\n\n  No patient is logged  \n\n\n\n\n\n"); 
+                return res.render('pages/HReq',{title:"Blood Bank",css1:"reg",css2:"Preq",css3:"animate",scrp:"reg", isLogged :0})
+              }
+              else 
+                {
+                  ssn= rows[0].SSN
+                  var insert_Query=` INSERT INTO PATIENT_ORDER (Blood_Type, Req_Amount , Req_Date , Patient_ID) 
+                  VALUES ('${BloodGroup}','${Quantity}','${curr_date}','${ssn}') ;` 
+      
+                  db.all(insert_Query, 
+                    (err) => {
+                      if (err) 
+                      {
+                        res.render('pages/HReq',{title:"Blood Bank",css1:"reg",css2:"Preq",css3:"animate",scrp:"reg", isLogged:1 })
+                        return console.log(err);
+                      }
+                      else 
+                      return res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home" ,isLogged:1})
+                    })
+      
+                  }  
+                })
+
+
         });
-        module.exports = router;
+    module.exports = router;
         
