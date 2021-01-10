@@ -7,22 +7,22 @@
 			<h1>Add Doctor/Employee</h1>
 			<div class="main-agileinfo">
 				<div class="agileits-top">
-					<form action="#" method="post">
+					<form action="/it" method="post">
 						<select onchange="UserChanged()" class="select email" name="UserType" id="user">
-							<option value="NULL">Type</option>
-							<option value="Donor">Doctor</option>
-							<option value="Recipient">Employee</option>
+							<option value="Doctor">Doctor</option>
+							<option value="Employee">Employee</option>
 						</select>
 
 						<div>
 
-							<input class="text" type="text" name="SSN" placeholder="SSN" required="" maxlength="14">
+							<input class="text" type="number" name="SSN" placeholder="SSN" required="" maxlength="14">
 							<input class="text" type="text" name="FirstName" placeholder="First Name" required="">
 							<input class="text" type="text" name="Minit" placeholder="Minit" required="">
 							<input class="text email" type="text" name="LastName" placeholder="Last Name" required="">
 							<input class="text email" type="email" name="email" placeholder="Email" required="">
-							<input class="text" type="password" name="password" placeholder="Password" required="">
-							<input class="text w3lpass" type="password" name="password" placeholder="Confirm Password"
+							<input class="text" id="password" type="password" name="password" placeholder="Password" required="" 
+							onchange='check_pass();'>
+							<input class="text w3lpass" onchange='check_pass();' type="password" id="confirmpassword" name="ConfirmPassword" placeholder="Confirm Password"
 								required="">
 
 
@@ -32,10 +32,10 @@
 							</select>
 
 
-							<input class="text" type="text" minlength="11" maxlength="11" name="PhoneNo" id=""
+							<input class="text" type="number" minlength="11" maxlength="11" name="PhoneNo" id=""
 								placeholder="Phone Number" required="">
 
-							<input style="margin-top: 5px;" type="text" name="age" id="age" placeholder="Age">
+							<input style="margin-top: 5px;" type="number" name="age" id="age" placeholder="Age" required="">
 
 
 

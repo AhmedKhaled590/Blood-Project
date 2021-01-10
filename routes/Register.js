@@ -28,8 +28,8 @@ router.post('/', function (req, res, next) {
     var gov = req.body.Gov;
     var address = req.body.Address;
     // lazem te3mel select 3al SSN l awal w lw rege3lek msh fady show message eno meta5ed
-    db.all(`INSERT INTO DONOR(SSN,Fname,Minit,Lname,Age,Address,Phone_Num,Email,pass_word,Gender,Blood_Type,Logged)
-          VALUES(?,?,?,?,?,?,?,?,?,?,?,1)`,
+    db.all(`INSERT INTO DONOR(SSN,Fname,Minit,Lname,Age,Address,Phone_Num,Email,pass_word,Gender,Blood_Type,Logged,Notification)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,1,'No Notifiction')`,
       [ssn, firstName, Minit, lastName, age, address, num, email, password, gender, bloodGroup],
       (err) => {
         if (err) return console.log(err);
@@ -52,8 +52,8 @@ router.post('/', function (req, res, next) {
     var gov = req.body.Gov;
     var address = req.body.Address;
     // const {SSN, FirstName} = req.body;
-    db.all(`INSERT INTO PATIENT(SSN,Fname,Minit,Lname,Age,Address,Phone_Num,Email,pass_word,Gender,Blood_Type,Logged)
-    VALUES(?,?,?,?,?,?,?,?,?,?,?,1)`,
+    db.all(`INSERT INTO PATIENT(SSN,Fname,Minit,Lname,Age,Address,Phone_Num,Email,pass_word,Gender,Blood_Type,Logged,Notification)
+    VALUES(?,?,?,?,?,?,?,?,?,?,?,1,'No Notification')`,
     [ssn, firstName, Minit, lastName, age, address, num, email, password, gender, bloodGroup],
     (err) => {
       if (err) return console.log(err);
@@ -63,8 +63,8 @@ router.post('/', function (req, res, next) {
   else if(req.body.UserType === "Organization"){
     console.log("wselt");
     const {OrganizationName,email,password,PhoneNo,Gov,Address}=req.body;
-    db.all(`INSERT INTO ORGANIZATIONS(O_name,Email,Pass_word,Phone_Num,Location,logged)
-            VALUES(?,?,?,?,?,1)`,[OrganizationName,email,password,PhoneNo,Gov+''+Address],
+    db.all(`INSERT INTO ORGANIZATIONS(O_name,Email,Pass_word,Phone_Num,Location,logged,Notification)
+            VALUES(?,?,?,?,?,1,'No  Notification')`,[OrganizationName,email,password,PhoneNo,Gov+''+Address],
             (err)=>{
               if(err) return console.log(err);
               res.render('pages/Home',{ title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", UserName: OrganizationName })
