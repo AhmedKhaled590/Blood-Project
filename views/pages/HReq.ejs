@@ -24,9 +24,8 @@
         <h1>Request Blood</h1>
         <div class="main-agileinfo">
             <div class="agileits-top">
-                <form action="#" method="post">
+                <form action="/HReq" method="post">
                     <select class="select" name="BloodGroup">
-                        <option value="N/A">Blood Group</option>
                         <option value="A+">A+</option>
                         <option value="A-">A-</option>
                         <option value="B+">B+</option>
@@ -36,7 +35,7 @@
                         <option value="AB+">AB+</option>
                         <option value="AB-">AB-</option>
                     </select>
-                    <input style="width: 99%;" type="text" placeholder="Quantity">
+                    <input style="width: 99%;" type="number" name="Quantity" placeholder="Quantity" required="">
                     <input type="submit" value="Request">
                 </form>
             </div>
@@ -58,7 +57,8 @@
             <li></li>
             <li></li>
         </ul>
-    </div>
+    </div> 
     <!-- //main -->
-</body>
+</body>>
 <%- include('../templates/footer.ejs'); %>
+  
