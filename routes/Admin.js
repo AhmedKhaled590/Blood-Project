@@ -179,10 +179,20 @@ router.post('/Orders', function (req, res, next) {
 router.get('/Inventory', function (req, res, next) {
   var sql = 'SELECT*FROM INVENTORY I,DON_RECORD R ,DONOR D WHERE I.Sample_ID=R.Sample_ID AND R.SSN=D.SSN ';
 
-  db.all(sql, [], function (err, inv) {
-    res.render('pages/Inventory', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "Inventory", Inventory: inv })
-
+  var NumberOfDonations;
+  db.all('SELECT COUNT(*) as n FROM INVENTORY', function (err, num) {
+    num.forEach(nd => {
+      NumberOfDonations = nd.n;
+    })
   })
+
+  db.all('SELECT r.blood_type, COUNT(*) as n FROM INVENTORY R group by r.blood_type  ', function (err, rows) {
+    db.all('select fname,d.ssn,count(*) as n from inventory i ,DON_RECORD d,donor dn WHERE i.Sample_ID=d.Sample_ID and d.ssn=dn.ssn GROUP by d.ssn,dn.fname ORDER by n DESC limit 1', (err, dn) => {
+      db.all(sql, [], function (err, inv) {
+        res.render('pages/Inventory', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "Inventory", Inventory: inv, numdon: NumberOfDonations, samples: rows, donor: dn[0] })
+      })
+    });
+  });
 });
 
 

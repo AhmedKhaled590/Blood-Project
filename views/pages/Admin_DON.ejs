@@ -22,21 +22,22 @@
 
             </div>
         </nav>
+        <td><a href = "/Admin/Tests"><button style="width: 50%;font-size: 30px;margin-left: 25%;" class="btn btn-danger ">Check Confirmed Requests</button></a></td>
+
         <table style="display: none;" class="table table-bordered  table-bg">
             <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Donations Requests Total (<%=total.n%>)</h1>
+
             <tbody>
                 <tr>
                     <td class="hd" scope="row">ID</td>
                     <td class="hd">Name</td>
                     <td class="hd">Blood Group</td>
-                    <td class="hd">Confirmation</td>
                 </tr>
                 <%Donations.forEach(row=>{%>
                 <tr>
                     <td  scope="row"><%=row.ID%></td>
                     <td><%=row.Fname%></td>
                     <td><%=row.Blood_Type%></td>
-                    <td><a href = "/Admin/Tests"><button style="width: 50%;font-size: 30px;" class="btn btn-danger ">Confirm</button></a></td>
                 </tr>
                 <% });%>
             </tbody>
