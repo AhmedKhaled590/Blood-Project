@@ -22,6 +22,10 @@
     <!-- main -->
     <div class="main-w3layouts wrapper">
         <h1>Request Blood</h1>
+
+        <% if (  isLogged == 0 ) { %>
+          <p style="color: black; text-align: center; margin-top: 30px; font-size: 15px;"> No Organization is logged cant request </p>
+        <% }  %>
         <div class="main-agileinfo">
             <div class="agileits-top">
                 <form action="/HReq" method="post">

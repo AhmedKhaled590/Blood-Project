@@ -8,7 +8,7 @@ var db = require('../DB/DatabaseConfig');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('pages/HReq',{title:"Blood Bank",css1:"reg",css2:"Preq",css3:"animate",scrp:"reg"})
+  res.render('pages/HReq',{title:"Blood Bank",css1:"reg",css2:"Preq",css3:"animate",scrp:"reg" ,isLogged:1})
 });
 
 router.post('/', async(req, res) =>{
@@ -26,7 +26,7 @@ router.post('/', async(req, res) =>{
         if (err || rows[0] == undefined ) 
         {
           console.log(err +  "\n\n\n\n\n\n  No Orgaization is logged  \n\n\n\n\n\n"); 
-          return res.render('pages/HReq',{title:"Blood Bank",css1:"reg",css2:"Preq",css3:"animate",scrp:"reg"})
+          return res.render('pages/HReq',{title:"Blood Bank",css1:"reg",css2:"Preq",css3:"animate",scrp:"reg", isLogged :0})
         }
         else 
           {
@@ -42,7 +42,7 @@ router.post('/', async(req, res) =>{
                   return console.log(err);
                 }
                 else 
-                return res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home" })
+                return res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home" ,isLogged:1})
               })
 
           }  
