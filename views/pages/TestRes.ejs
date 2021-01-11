@@ -22,7 +22,7 @@
         </div>
       </nav>
       <table style="display: none;" class="table table-bordered  table-bg">
-        <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Test Results</h1>
+        <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Confirmed Donation Requsets</h1>
         <tbody>
           <tr>
             <td class="hd" scope="row">SSN</td>
@@ -66,12 +66,16 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div style="font-size: 30px;" class="modal-body">
             <form action="/Admin/Tests" method="POST">
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">SSN</label>
-                <input name="SSN" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text" class="form-control"
+                <select style="width: 50%;" name="SSN" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="select" class="form-control"
                   id="Location">
+                  <%ssn.forEach(s=>{%>
+                    <option style="color:black; font-size: 20px;"  value="<%=s.SSN%>"><%=s.SSN%></option>
+                  <%})%>
+                </select>
               </div>
 
 

@@ -4,21 +4,25 @@
 
     <body>
         <div class="container-fluid dd">
-            <nav class="nav">
-                <div class="container">
-                    <div class="logo">
-                        <a href="/">Blood Bank</a>
-                    </div>
-                    <div id="mainListDiv" class="main_list">
-                        <ul class="navlinks">
-                            <li><a>Admin Panel</a></li>
-                        </ul>
-                    </div>
-                    <span class="navTrigger">
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                    </span>
+            <nav style="margin-bottom:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Admin">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                   
+                    <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
+                    <p class="nav-item nav-link">
+                        <%=UserName%>
+                    </p>
+                    <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
+
                 </div>
             </nav>
             <table style="display: none;" class="table table-bordered  table-bg">
@@ -42,7 +46,7 @@
                 </tbody>
             </table>
             <table style="display: none;" class="table table-bordered  table-bg">
-                <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Most Donor</h1>
+                <h1 style="color: white; text-align: center; margin-top: 30px; font-size: 50px;">Most 3 Donor</h1>
                 <tbody>
     
                     <tr>
@@ -50,18 +54,25 @@
                             SSN
                         </td>
                         <td class="hd" scope="row">
-                            Fname
+                            name
+                        </td>
+                        <td class="hd" scope="row">
+                            Phone Number
                         </td>
                     </tr>
-    
+                    <%donors.forEach(donor=>{%>
                     <tr>
                         <td scope="row">
                             <%=donor.SSN%>
                         </td>
                         <td scope="row">
-                            <%=donor.Fname%>
+                            <%=donor.Fname%> <%=donor.Lname%>
+                        </td>
+                        <td scope="row">
+                            <%=donor.Phone_Num%>
                         </td>
                     </tr>
+                <%})%>
                 </tbody>
             </table>
 

@@ -2,21 +2,24 @@
 
     <body>
         <div class="container-fluid dd">
-            <nav class="nav">
-                <div class="container">
-                    <div class="logo">
-                        <a href="/">Blood Bank</a>
-                    </div>
-                    <div id="mainListDiv" class="main_list">
-                        <ul class="navlinks">
-                            <li><a>Admin Panel</a></li>
-                        </ul>
-                    </div>
-                    <span class="navTrigger">
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                    </span>
+            <nav style="margin-bottom:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Admin">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <a style="width: 1%;" href="/Notif"><img style="width: 100%;"
+                            src="../../images/notification.png"></a>
+                    <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
+                    <p class="nav-item nav-link"><%=UserName%></p>
+                    <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
+    
                 </div>
             </nav>
             <%if (typeof msg != 'undefined'){%>

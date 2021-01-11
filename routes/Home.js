@@ -48,7 +48,8 @@ router.get('/', function (req, res, next) {
           break;
       }
     })
-    res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home",countApos,countAneg,countBpos,countBneg,countABpos,countABneg,countOpos,countOneg})  
+  
+    res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", countApos, countAneg, countBpos, countBneg, countABpos, countABneg, countOpos, countOneg })
   })
 });
 
@@ -74,7 +75,7 @@ router.post('/ChangeAppointment', function (req, res, next) {
   }
   else {
     db.all('select*from donor where logged=1', (err, row) => {
-      db.all("UPDATE DONATION_REQUESTS SET DETERMINED_DATE = '' WHERE SSN = ?",[row[0].SSN],(err)=>{
+      db.all("UPDATE DONATION_REQUESTS SET DETERMINED_DATE = '' WHERE SSN = ?", [row[0].SSN], (err) => {
         db.all('select*from donation_requests where ssn = ?', [row[0].SSN], (err, records) => {
           res.render('pages/CHGAppointement', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", res: records[0] })
         })

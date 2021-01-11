@@ -1,71 +1,82 @@
 <%- include('../templates/header.ejs'); %>
-<script>
-	$(document).ready(function(){
-		$(".toast").toast();
-	});
+	<script>
+		$(document).ready(function () {
+			$(".toast").toast();
+		});
 	</script>
-<body>
-	
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/maxresdefault.jpg')">
-			<div style="display: none;" class="wrap-login100">
-				<form class="login100-form validate-form" method="post" action="/login">
 
-					<select onchange="UserChanged()" class="select type" name="UserType" id="user">
-						<option value="NULL">UserType</option>
-						<option value="Donor">Donor</option>
-						<option value="Recipient">Recipient</option>
-						<option value="Organization">Organization</option>
-						<option value="Doctor">Doctor</option>
-						<option value="Employee">Employee</option>
-					</select>
-					
+	<body>
 
+		<div class="limiter">
+			<div class="container-login100" style="background-image: url('images/maxresdefault.jpg')">
+				<div style="display: none;" class="wrap-login100">
+					<form class="login100-form validate-form" method="post" action="/login">
 
-					<span class="login100-form-logo">
-						<img class="logo1" src="../../images/1_KJACFKJ0GKtnhgR7OmlPFA.gif">
-					</span>
-
-					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
-					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="username" placeholder="E-mail">
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="pass" placeholder="Password">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
-					</div>
-
-					<div class="contact100-form-checkbox">
-						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-						<label class="label-checkbox100" for="ckb1">
-							Remember me
-						</label>
-					</div>
-
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
-					</div>
+						<select onchange="UserChanged()" class="select type" name="UserType" id="user">
+							<option value="NULL">UserType</option>
+							<option value="Donor">Donor</option>
+							<option value="Recipient">Recipient</option>
+							<option value="Organization">Organization</option>
+							<option value="Doctor">Doctor</option>
+							<option value="Employee">Employee</option>
+						</select>
+						<%if (typeof msg != 'undefined'){%>
+							<div style="font-size: 30px;" class="alert alert-danger">
+								<div class="container">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true"><i class="material-icons">clear</i></span>
+									</button>
+									<span><%=msg%></span>
+								</div>
+							</div>
+						<%}%>
 
 
-					<div class="text-center p-t-90">
-					<p style="color: white;">Don't have an Account? <a class="txt1" href="/Register"> Register Now!</a></p>
+				<span class="login100-form-logo">
+					<img class="logo1" src="../../images/1_KJACFKJ0GKtnhgR7OmlPFA.gif">
+				</span>
 
-						<a class="txt1" href="#">
-							Forgot Password?
-						</a>
-					</div>
+				<span class="login100-form-title p-b-34 p-t-27">
+					Log in
+				</span>
+
+				<div class="wrap-input100 validate-input" data-validate="Enter username">
+					<input class="input100" type="text" name="username" placeholder="E-mail">
+					<span class="focus-input100" data-placeholder="&#xf207;"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate="Enter password">
+					<input class="input100" type="password" name="pass" placeholder="Password">
+					<span class="focus-input100" data-placeholder="&#xf191;"></span>
+				</div>
+
+				<div class="contact100-form-checkbox">
+					<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+					<label class="label-checkbox100" for="ckb1">
+						Remember me
+					</label>
+				</div>
+
+				<div class="container-login100-form-btn">
+					<button class="login100-form-btn">
+						Login
+					</button>
+				</div>
+
+
+				<div class="text-center p-t-90">
+					<p style="color: white;">Don't have an Account? <a class="txt1" href="/Register">
+							Register Now!</a></p>
+
+					<a class="txt1" href="#">
+						Forgot Password?
+					</a>
+				</div>
 				</form>
 			</div>
 		</div>
-	</div>
-	
+		</div>
 
-	<div id="dropDownSelect1"></div>
-<%- include('../templates/footer.ejs'); %>
+
+		<div id="dropDownSelect1"></div>
+		<%- include('../templates/footer.ejs'); %>
