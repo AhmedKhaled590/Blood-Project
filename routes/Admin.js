@@ -57,6 +57,7 @@ router.get('/DonRecords', function (req, res, next) {
   });
 
   db.all('SELECT blood_type, COUNT(*) as n FROM DON_RECORD R,DONOR D WHERE R.SSN=D.SSN group by blood_type', function (err, rows) {
+    console.log('dasd',rows);
     if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
     sample = rows;
   });
@@ -68,6 +69,7 @@ router.get('/DonRecords', function (req, res, next) {
     })
   });
 
+  
   db.all('SELECT * FROM DON_RECORD R ,DONOR D,num v WHERE D.SSN=R.SSN and r.ssn = v.ssn ', function (err, rows) {
     db.all('SELECT COUNT(*) as n FROM DON_RECORD', function (err, num) {
       if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" });
@@ -276,6 +278,7 @@ db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user)
 router.get('/Branches', function (req, res, next) {
   var User;
 db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
+  
   User = user;
 });
   db.all('SELECT*FROM BRANCH', [], function (err, branches) {
@@ -308,6 +311,11 @@ router.post('/Branches',
     var SSNDR = req.body.SSNDoctors;
     var SalaryDR = req.body.SalaryDoctors;
 
+    var User;
+    db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
+      User = user;
+    });
+
 
     if (Location != undefined && PhoneNum != undefined) {
       if (isLetter(Location)) {
@@ -317,7 +325,7 @@ router.post('/Branches',
             else {
               db.all('SELECT*FROM BRANCH', [], function (err, branches) {
                 if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
-                res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branches })
+                res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branches,UserName:User.Fname })
               });
             }
           });
@@ -337,7 +345,7 @@ router.post('/Branches',
           if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
           db.all('SELECT*FROM BRANCH', [], function (err, branches) {
             if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
-            res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branches })
+            res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branches,UserName:User.Fname })
           });
         });
       }
@@ -366,7 +374,7 @@ router.post('/Branches',
         db.all('UPDATE EMPLOYEE SET SALARY = ? WHERE SSN = ?', [Salary, SSNEmp], (err) => {
           if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
           db.all('SELECT*FROM BRANCH', [], function (err, branches) {
-            res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branches })
+            res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branches,UserName:User.Fname })
           });
         })
       }
@@ -380,7 +388,7 @@ router.post('/Branches',
         db.all('UPDATE Doctor SET SALARY = ? WHERE SSN = ?', [SalaryDR, SSNDR], (err) => {
           if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
           db.all('SELECT*FROM BRANCH', [], function (err, branches) {
-            res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branches })
+            res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branche,UserName:User.Fnames })
           });
         })
       }
