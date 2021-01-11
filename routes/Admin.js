@@ -14,8 +14,10 @@ db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user)
 });
 
 router.get('/', function (req, res, next) {
-  console.log(User);
-
+  var User;
+  db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
+    User = user;
+  });
   if (User != undefined) {
     res.render('pages/Admin_MAIN', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", UserName: User.Fname + " " + User.Lname });
   }
@@ -28,6 +30,10 @@ router.get('/', function (req, res, next) {
 
 var tot;
 router.get('/Don', function (req, res, next) {
+  var User;
+db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
+  User = user;
+});
   db.all('SELECT *from Donation_requests R,DONOR D WHERE D.SSN = R.SSN AND (r.test_result!="REJECTED" or r.test_result!="FINISHED") ', function (err, rows) {
     if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
     db.all('SELECT COUNT(*) AS n FROM DONATION_REQUESTS r where r.test_result="QUEUED" ', [], (err, t) => {
@@ -45,7 +51,10 @@ var sample;
 var bestDonor;
 router.get('/DonRecords', function (req, res, next) {
 
-
+  var User;
+  db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
+    User = user;
+  });
 
   db.all('SELECT blood_type, COUNT(*) as n FROM DON_RECORD R,DONOR D WHERE R.SSN=D.SSN group by blood_type', function (err, rows) {
     if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
@@ -69,6 +78,10 @@ router.get('/DonRecords', function (req, res, next) {
 
 
 router.get('/Tests', function (req, res, next) {
+  var User;
+db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
+  User = user;
+});
   db.all('SELECT d.ssn,d.fname,d.blood_type,q.test_result,dr.fname as drname FROM DONOR D,Donation_requests q ,DOCTORs_DONORS_CASES N,doctor dr WHERE q.ssn=d.ssn and D.SSN = N.SSN and dr.ssn = n.DOCTOR_SSN anD q.test_result="CONFIRMED" and q.DETERMINED_DATE==""', [], function (err, rows) {
     if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
 
@@ -82,6 +95,10 @@ router.get('/Tests', function (req, res, next) {
 
 
 router.post('/Tests', function (req, res, next) {
+  var User;
+db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
+  User = user;
+});
   console.log(req.body);
   var SSN = req.body.SSN;
   var Don_date = req.body.DONDATE;
@@ -106,6 +123,10 @@ router.post('/Tests', function (req, res, next) {
 
 
 router.get('/Orders', function (req, res, next) {
+  var User;
+db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
+  User = user;
+});
   db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID", (err, pat) => {
     if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
     db.all("select*from org_order R,ORGANIZATIONS O WHERE R.ORG_ID=O.O_ID", (err, org) => {
@@ -115,6 +136,10 @@ router.get('/Orders', function (req, res, next) {
   })
 });
 router.post('/Orders', function (req, res, next) {
+  var User;
+db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
+  User = user;
+});
   var orderIdOrd = req.body.OrderId;
   var orderIdResOrd = req.body.OrderIdRes;
   var orderIdOrg = req.body.OrderIdOrg;
@@ -150,9 +175,9 @@ router.post('/Orders', function (req, res, next) {
 
   else if (orderIdOrg != undefined) {
     db.all("SELECT * FROM Org_Order WHERE ORDER_ID = ?", [orderIdOrg], (err, requ) => {
-      if (err|| requ[0] === undefined) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
+      if (err || requ[0] === undefined) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
       db.all("select count(Blood_Type) as avail from inventory where BLOOD_TYPE=?", [requ[0].Blood_Type], (err, s) => {
-        if (err|| s[0] === undefined) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
+        if (err || s[0] === undefined) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
         if (s[0].avail >= requ[0].Req_Amount) {
           db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID", (err, pat) => {
             if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
@@ -177,9 +202,9 @@ router.post('/Orders', function (req, res, next) {
 
   else if (orderIdResOrd != undefined) {
     db.all("SELECT * FROM PATIENT_ORDER WHERE ORDER_ID = ?", [orderIdResOrd], (err, requ) => {
-      if (err|| requ[0] === undefined) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
+      if (err || requ[0] === undefined) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
       db.all("DELETE FROM INVENTORY WHERE Blood_Type= ? AND Sample_ID IN (SELECT Sample_ID FROM INVENTORY WHERE Blood_Type= ? limit ?)", [requ[0].Blood_Type, requ[0].Blood_Type, requ[0].Req_Amount], (err) => {
-        if (err|| s[0] === undefined) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
+        if (err || s[0] === undefined) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
         db.all("DELETE FROM PATIENT_ORDER WHERE ORDER_ID = ? ", [orderIdResOrd], (err) => {
           if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
           db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID", (err, pat) => {
@@ -219,6 +244,10 @@ router.post('/Orders', function (req, res, next) {
 
 
 router.get('/Inventory', function (req, res, next) {
+  var User;
+db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
+  User = user;
+});
 
   var sql = 'SELECT*FROM INVENTORY I,DON_RECORD R ,DONOR D WHERE I.Sample_ID=R.Sample_ID AND R.SSN=D.SSN ';
 
@@ -237,7 +266,7 @@ router.get('/Inventory', function (req, res, next) {
     db.all('select fname,d.ssn,dn.phone_num,dn.lname,count(*) as n from inventory i ,DON_RECORD d,donor dn WHERE i.Sample_ID=d.Sample_ID and d.ssn=dn.ssn GROUP by d.ssn,dn.fname,dn.phone_num,dn.lname ORDER by n DESC limit 3', (err, dn) => {
       db.all(sql, [], function (err, inv) {
         if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
-        res.render('pages/Inventory', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "Inventory", Inventory: inv, numdon: NumberOfDonations, samples: rows, donors: dn, UserName: User.Fname + " " + User.Lname })
+          res.render('pages/Inventory', { title: "Blood Bank", css1: "home", css2: "style", css3: "", scrp: "Inventory", Inventory: inv, numdon: NumberOfDonations, samples: rows, donors: dn,UserName:User.Fname })
       })
     });
   });
@@ -245,9 +274,13 @@ router.get('/Inventory', function (req, res, next) {
 
 
 router.get('/Branches', function (req, res, next) {
+  var User;
+db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
+  User = user;
+});
   db.all('SELECT*FROM BRANCH', [], function (err, branches) {
     if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
-    res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branches })
+    res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branches,UserName:User.Fname })
   })
 });
 
