@@ -1,6 +1,4 @@
 <%- include('../templates/header.ejs'); %>
-
-
 <body>
   <div class="container-fluid dd">
     <nav style="margin:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
@@ -10,14 +8,9 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarColor01">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-            </li>
-          </ul>
-          <a style="width: 1%;" href="/Notif"><img style="width: 100%;" src="../../images/notification.png"></a>
+          
           <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
-          <p class="nav-item nav-link"><%=UserName%></p>
+          <p class="nav-item nav-link"><%= (typeof UserName !== 'undefined') ? UserName : 'User Name' %></p>
           <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
 
         </div>
@@ -27,44 +20,24 @@
         <tbody>
             <tr>
                 <td class="hd" scope="row">Order ID</td>
-                <td class="hd">Name</td>
                 <td class="hd">Weight</td>
                 <td class="hd">Age</td>
                 <td class="hd">Last Donation since</td>
                 <td class="hd">Last Visit to Dentist</td>
+            
+            
+            <%if (Requests!=undefined){%>                
             </tr>
-
+            <%Requests.forEach(row=>{%>
             <tr>
-                <td scope="row">1</td>
-                <td>Ahmed Gamal</td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-              
-
+                <td><%=row.ID%></td>
+                <td><%=row.Weight%></td>
+                <td><%=row.Age%></td>
+                <td><%=row.LDate%></td>
+                <td><%=row.DDate%></td>
             </tr>
-
-            <tr>
-                <td scope="row">2</td>
-                <td>Ahmed Mahmoud</td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-              
-            </tr>
-
-
-            <tr>
-                <td scope="row">3</td>
-                <td>Omar Mohamed</td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-              
-            </tr>
+            <% });%>
+           <%}%>
         </tbody>
     </table>
 
@@ -86,16 +59,15 @@ aria-hidden="true">
             </button>
         </div>
         <div class="modal-body">
-            <form action="/Admin/DoctorTests" method="POST">
+            <form action="/DoctorTests" method="POST">
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">OrderId</label>
-                    <input name="OrderIdTest" style="border: 1px solid rgba(77, 76, 76, 0.357); color: black" type="text"
+                    <input name="OrderIdTest" style="border: 1px solid rgba(77, 76, 76, 0.357); color: black" type="number" required=""
                         class="form-control" id="Location">
                 </div>
                 <div class="form-group">
                     <label for="message-text" class="col-form-label">Result</label>
                     <select style="border:1px solid rgba(77, 76, 76, 0.357); color: black;" onchange="UserChanged()" class="select email" name="Res" id="user">
-                      <option value="NULL">Result</option>
                       <option value="CONFIRMED">CONFIRMED</option>
                       <option value="REJECTED">REJECTED</option>
                     </select>
@@ -111,7 +83,6 @@ aria-hidden="true">
     </div>
 </div>
 </div>
-
     <!-- //main -->
 </body>
 <%- include('../templates/footer.ejs'); %>

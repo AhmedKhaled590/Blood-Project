@@ -14,9 +14,10 @@
                         <a class="nav-link" href="/Admin">Home <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
-              
+                <a style="width: 1%;" href="/Notif"><img style="width: 100%;"
+                        src="../../images/notification.png"></a>
                 <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
-                <p class="nav-item nav-link"><%=UserName%></p>
+                <p class="nav-item nav-link"><%= (typeof UserName !== 'undefined') ? UserName : 'User Name' %></p>
                 <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
 
             </div>
@@ -31,7 +32,8 @@
                     <td class="hd">SSN</td>
                     <td class="hd">Name</td>
                     <td class="hd">Blood Group</td>
-                    <td class="hd">Number Of Donations</td>                    
+                    <td class="hd">Number Of Donations</td>  
+                    <%if (Donations!=undefined){%>                
                 </tr>
                 <%Donations.forEach(row=>{%>
                 <tr>
@@ -42,6 +44,7 @@
                     <td><%=row.n%></td>
                 </tr>
                 <% });%>
+               <%}%>
             </tbody>
         </table>
         <table style="display: none;" class="table table-bordered  table-bg">
@@ -53,7 +56,7 @@
                         <%=numdon%>
                     </td>
                 </tr>
-
+                <%if (samples!=undefined){%>  
                 <%samples.forEach(sample=>{%>
                     <tr>
                         <td class="hd" scope="row">Number Of <%=sample.Blood_Type%> Samples</td>
@@ -62,6 +65,7 @@
                         </td>
                     </tr>
                     <%})%>
+                    <%}%>
             </tbody>
         </table>
         <table style="display: none;" class="table table-bordered  table-bg">
@@ -76,15 +80,19 @@
                         Fname
                     </td>
                 </tr>
-
+                <%if (donor!=undefined){%>  
                 <tr>
+                   
                     <td scope="row">
+
                         <%=donor.SSN%>
                     </td>
                     <td scope="row">
                         <%=donor.Fname%>
                     </td>
+
                 </tr>
+            <%}%>
             </tbody>
         </table>
 
@@ -100,11 +108,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/Admin/Branches" method="POST">
+                <form action="/Admin/DonRecords" method="POST">
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">RequestId</label>
-                        <input name="RequestId" style="border: 1px solid rgba(77, 76, 76, 0.357);" type="text"
-                            class="form-control" id="Location">
+                        <input type="number"  required="" name="RequestId" style="border: 1px solid rgba(77, 76, 76, 0.357);" 
+                            class="form-control" id="Location" >
                     </div>
             </div>
             <div class="modal-footer">

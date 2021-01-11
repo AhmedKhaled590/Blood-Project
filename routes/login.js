@@ -12,8 +12,8 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
   const { username, pass } = req.body;
-  if (!username || !pass) return res.send("Enter Email and Password!");
-  if(req.body.UserType==="NULL") return res.send("Enter a user type!");
+  if (!username || !pass) return res.render('pages/Login', { title: "Blood Bank", css1: "util", css2: "login", css3: "animate", scrp: "main",msg:"Enter Email and Password!" })
+  if(req.body.UserType==="NULL") return res.render('pages/Login', { title: "Blood Bank", css1: "util", css2: "login", css3: "animate", scrp: "main",msg:"Enter a user type!" })
   let user;
 
   if (req.body.UserType === "Donor") {
@@ -70,7 +70,10 @@ router.post('/', function (req, res, next) {
       if (user[0] != undefined) {
         db.all(`UPDATE DOCTOR SET logged=1 WHERE Email=? AND pass_word=?`, [username, pass]);
         user.forEach(record => {
-          res.render('pages/Doctors_Test', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", UserName: record.Fname + " " + record.Lname });
+          db.all('SELECT ID,Weight,DDate,LDate,Age from Donation_Requests R join Donor D on R.SSN=D.SSN where TEST_RESULT="QUEUED"',(err,rows)=>{
+            console.log(rows);
+        res.render('pages/Doctors_Test',{title:"Blood Bank",css1:"home",css2:"Preq",css3:"reg",scrp:"home",Requests:rows, UserName: record.Fname + " " + record.Lname })
+      });
         })
       }
       else return   res.render('pages/Login', { title: "Blood Bank", css1: "util", css2: "login", css3: "animate", scrp: "main",msg:"Enter a correct Email and Password!" })

@@ -11,15 +11,6 @@
 			<div class="container-login100" style="background-image: url('images/maxresdefault.jpg')">
 				<div style="display: none;" class="wrap-login100">
 					<form class="login100-form validate-form" method="post" action="/login">
-
-						<select onchange="UserChanged()" class="select type" name="UserType" id="user">
-							<option value="NULL">UserType</option>
-							<option value="Donor">Donor</option>
-							<option value="Recipient">Recipient</option>
-							<option value="Organization">Organization</option>
-							<option value="Doctor">Doctor</option>
-							<option value="Employee">Employee</option>
-						</select>
 						<%if (typeof msg != 'undefined'){%>
 							<div style="font-size: 30px;" class="alert alert-danger">
 								<div class="container">
@@ -40,6 +31,14 @@
 					Log in
 				</span>
 
+				<select  style="background-color: transparent; margin: 10px; width: 70%; margin-left: 16%; color: white; font-weight: 500;" onchange="UserChanged()" class="select type" name="UserType" id="user">
+					<option style="background-color: rgb(187, 33, 5);color: white;" value="NULL">UserType</option>
+					<option style="background-color: rgb(187, 33, 5);color: white; value="Donor">Donor</option>
+					<option style="background-color: rgb(187, 33, 5);color: white; value="Recipient">Recipient</option>
+					<option style="background-color: rgb(187, 33, 5);color: white; value="Organization">Organization</option>
+					<option style="background-color: rgb(187, 33, 5);color: white; value="Doctor">Doctor</option>
+					<option style="background-color: rgb(187, 33, 5);color: white; value="Employee">Employee</option>
+				</select>
 				<div class="wrap-input100 validate-input" data-validate="Enter username">
 					<input class="input100" type="text" name="username" placeholder="E-mail">
 					<span class="focus-input100" data-placeholder="&#xf207;"></span>

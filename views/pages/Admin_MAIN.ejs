@@ -18,7 +18,7 @@
                    
                     <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
                     <p class="nav-item nav-link">
-                        <%=UserName%>
+                        <%= (typeof UserName !== 'undefined') ? UserName : 'User Name' %>
                     </p>
                     <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
 
@@ -39,8 +39,7 @@
                 <div class="row">
                     <div class="col-4 col-md-6">
                         <a href="/Admin/Tests" class="req btn btn-request btn-circle btn-circle-xl ml-1"><img
-                                style="width: 30%;" src="images/blood-test.png"><span class="req">Test
-                                Results</span></a>
+                                style="width: 30%;" src="images/blood-test.png"><span class="req"> <br>Appointements</span></a>
                     </div>
                     <div class="col-4 col-md-6">
                         <a href="/Admin/Branches" class="req btn btn-request btn-circle btn-circle-xl ml-1"><img
