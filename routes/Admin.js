@@ -490,7 +490,7 @@ router.post('/Branches',
 
 
     else if (SSNEmp != undefined) {
-      if (isNum(SSNEmp) && isNum(Salary)) {
+      if (isNum(SSNEmp) && isNum(Salary)&&Salary>0) {
         db.all('UPDATE EMPLOYEE SET SALARY = ? WHERE SSN = ?', [Salary, SSNEmp], (err) => {
           if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
           db.all('SELECT*FROM BRANCH', [], function (err, branches) {
@@ -499,12 +499,12 @@ router.post('/Branches',
         })
       }
       else {
-        return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Must Be A Number" })
+        return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Must Be A  Positive Number" })
 
       }
     }
     else if (SSNDR != undefined) {
-      if (isNum(SalaryDR) && isNum(SSNDR)) {
+      if (isNum(SalaryDR) && isNum(SSNDR)&&SalaryDR>0) {
         db.all('UPDATE Doctor SET SALARY = ? WHERE SSN = ?', [SalaryDR, SSNDR], (err) => {
           if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
           db.all('SELECT*FROM BRANCH', [], function (err, branches) {
@@ -513,7 +513,7 @@ router.post('/Branches',
         })
       }
       else {
-        return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Must Be A Number" })
+        return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Must Be A  Positive  Number" })
 
       }
     }
@@ -525,8 +525,13 @@ router.post('/Branches',
         });
       }
       else {
-        return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Must Be A Number" })
+        return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Must Be A Positive Number" })
       }
+    }
+    else
+    {
+      return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Invalid Input" })
+
     }
   });
 
