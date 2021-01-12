@@ -28,14 +28,14 @@
 						</select>
 
 						<div style="display: none;" id="person">
-							<input class="text" type="text" name="SSN" placeholder="SSN" required="">
+							<input class="text" type="text" name="SSN" placeholder="SSN" required="" minlength="14" maxlength="14">
 							<input class="text" type="text" name="FirstName" placeholder="First Name" required="">
-							<input class="text" type="text" name="Minit" placeholder="Minit" required="">
+							<input class="text" type="text" name="Minit" placeholder="Minit" required="" minlength="1" maxlength="1">
 							<input class="text email" type="text" name="LastName" placeholder="Last Name" required="">
 							<input class="text email" type="email" name="email" placeholder="Email" required="">
-							<input class="text" type="password" name="password" placeholder="Password" required="">
+							<input class="text" type="password" name="password" placeholder="Password" required="" minlength="8">
 							<input class="text w3lpass" type="password" name="confirmPassword"
-								placeholder="Confirm Password" required="">
+								placeholder="Confirm Password" required="" minlength="8">
 
 							<select class="select" name="BloodGroup">
 								<option value="N/A">Blood Group</option>
@@ -55,7 +55,7 @@
 								<option value="Female">F</option>
 							</select>
 
-							<input class="text" type="text" name="Weight" placeholder="Weight" required="">
+							<input class="text" type="text" name="Weight" placeholder="Weight" required="" >
 
 							<input class="text" type="text" minlength="11" maxlength="11" name="PhoneNo" id=""
 								placeholder="Phone Number" required="">
