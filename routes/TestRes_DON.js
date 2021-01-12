@@ -21,12 +21,12 @@ router.get('/', function(req, res, next) {
     if (err) 
     {
       console.log(err);   // if erroe go to home 
-      res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home",UserName:User.Fname })
+      res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home",UserName:"" })
     }
     else 
     { 
         // if done display them
-      res.render('pages/TestRes_DON',{title:"Blood Bank",css1:"home",css2:"Preq",css3:"animate",scrp:"home" , data:rows,UserName:User.Fname})
+      res.render('pages/TestRes_DON',{title:"Blood Bank",css1:"home",css2:"Preq",css3:"animate",scrp:"home" , data:rows,UserName:""})
     } 
   })
   return ;

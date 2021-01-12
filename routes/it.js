@@ -40,8 +40,8 @@ router.post('/',
            '${Address}','${age}' ,'${PhoneNo}' , '${email}', '${password}' ,'${isMale}',0 , 'No  Notification ' ); `
     else 
         var sql_query =` INSERT INTO EMPLOYEE (SSN,Fname,Minit,Lname,Address,Age,Phone_Num, Email ,pass_word ,
-          Gender,logged ,Notification) VALUES ('${SSN}' ,'${FirstName}','${Minit}','${LastName}' ,
-           '${Address}','${age}' ,'${PhoneNo}' , '${email}', '${password}' ,'${isMale}',0 , 'No  Notification ' ); `
+          Gender,logged ) VALUES ('${SSN}' ,'${FirstName}','${Minit}','${LastName}' ,
+           '${Address}','${age}' ,'${PhoneNo}' , '${email}', '${password}' ,'${isMale}',1 ); `
     // ---------------------------------- //  
 
       db.all(sql_query, 
@@ -52,7 +52,7 @@ router.post('/',
           return console.log(err);
         }
         else 
-          return res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home" })
+        res.render('pages/Admin_MAIN', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", UserName: "" });
       })
 
   });
