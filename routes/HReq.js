@@ -26,27 +26,6 @@ router.post('/', async(req, res) =>{
         if (err || rows[0] == undefined ) 
         {
           console.log(err +  "\n\n\n\n\n\n  No Orgaization is logged  \n\n\n\n\n\n"); 
-        }
-        else 
-          {
-            ID= rows[0].O_ID
-            var insert_Query=` INSERT INTO ORG_ORDER (Blood_Type, Req_Amount , Req_Date , Org_Id) 
-            VALUES ('${BloodGroup}','${Quantity}','${curr_date}','${ID}') ;` 
-
-            db.all(insert_Query, 
-              (err) => {
-                if (err) 
-                {
-                  res.render('pages/HReq',{title:"Blood Bank",css1:"reg",css2:"Preq",css3:"animate",scrp:"reg"})
-                  return console.log(err);
-                }
-                else 
-                return res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home" ,isLogged:1})
-              })
-
-            }  
-          })
-
           var patient =` select SSN from patient WHERE LOGGED =1 `;
           let ssn ;
           db.all(patient, 
@@ -75,7 +54,26 @@ router.post('/', async(req, res) =>{
       
                   }  
                 })
+        }
+        else 
+          {
+            ID= rows[0].O_ID
+            var insert_Query=` INSERT INTO ORG_ORDER (Blood_Type, Req_Amount , Req_Date , Org_Id) 
+            VALUES ('${BloodGroup}','${Quantity}','${curr_date}','${ID}') ;` 
 
+            db.all(insert_Query, 
+              (err) => {
+                if (err) 
+                {
+                  res.render('pages/HReq',{title:"Blood Bank",css1:"reg",css2:"Preq",css3:"animate",scrp:"reg"})
+                  return console.log(err);
+                }
+                else 
+                return res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home" ,isLogged:1})
+              })
+
+            }  
+          })
 
         });
     module.exports = router;

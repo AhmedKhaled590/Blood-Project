@@ -27,6 +27,9 @@ router.post('/', function (req, res, next) {
     var age = req.body.age;
     var gov = req.body.Gov;
     var address = req.body.Address;
+    if(typeof num!='number') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid Phone number!" })
+    if(typeof num!='ssn') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid SSN!" })
+    if(confirmPassword!=password) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Passwords do not match!" })
     // lazem te3mel select 3al SSN l awal w lw rege3lek msh fady show message eno meta5ed
     db.all(`INSERT INTO DONOR(SSN,Fname,Minit,Lname,Age,Address,Phone_Num,Email,pass_word,Gender,Blood_Type,Logged,Notification)
           VALUES(?,?,?,?,?,?,?,?,?,?,?,1,'No Notifiction')`,
@@ -52,6 +55,9 @@ router.post('/', function (req, res, next) {
     var gov = req.body.Gov;
     var address = req.body.Address;
     // const {SSN, FirstName} = req.body;
+    if(typeof num!='number') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid Phone number!" })
+    if(typeof num!='ssn') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid SSN!" })
+    if(confirmPassword!=password) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Passwords do not match!" })
     db.all(`INSERT INTO PATIENT(SSN,Fname,Minit,Lname,Age,Address,Phone_Num,Email,pass_word,Gender,Blood_Type,Logged,Notification)
     VALUES(?,?,?,?,?,?,?,?,?,?,?,1,'No Notification')`,
     [ssn, firstName, Minit, lastName, age, address, num, email, password, gender, bloodGroup],
@@ -63,6 +69,11 @@ router.post('/', function (req, res, next) {
   else if(req.body.UserType === "Organization"){
     console.log("wselt");
     const {OrganizationName,email,password,PhoneNo,Gov,Address}=req.body;
+    var pass=req.body.pass;
+    var number=req.body.PhoneNo
+    var confirmPassword = req.body.confirmPassword;
+    if(typeof number!='number') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid Phone number!" })
+    if(confirmPassword!=pass) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Passwords do not match!" })
     db.all(`INSERT INTO ORGANIZATIONS(O_name,Email,Pass_word,Phone_Num,Location,logged,Notification)
             VALUES(?,?,?,?,?,1,'No  Notification')`,[OrganizationName,email,password,PhoneNo,Gov+''+Address],
             (err)=>{

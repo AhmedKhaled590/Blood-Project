@@ -59,7 +59,7 @@ router.get('/Tests', function (req, res, next) {
 
 router.get('/ChangeAppointment', function (req, res, next) {
   db.all('select*from donor where logged=1', (err, row) => {
-    db.all('select*from donation_requests where ssn = ?', [row[0].SSN], (err, records) => {
+    db.all('select*from donation_requests where ssn = ? and ADDED!=1 and TEST_RESULT != "REJECTED"', [row[0].SSN], (err, records) => {
       res.render('pages/CHGAppointement', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", res: records[0] })
     })
   })
@@ -68,15 +68,15 @@ router.get('/ChangeAppointment', function (req, res, next) {
 router.post('/ChangeAppointment', function (req, res, next) {
   if (req.body.cancel != undefined) {
     db.all('select*from donor where logged=1', (err, row) => {
-      db.all('delete from donation_requests where ssn = ?', [row[0].SSN], err => {
+      db.all('delete from donation_requests where ssn = ? and ADDED!=1 and TEST_RESULT != "REJECTED" ', [row[0].SSN], err => {
         res.render('pages/CHGAppointement', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", })
       })
     })
   }
   else {
     db.all('select*from donor where logged=1', (err, row) => {
-      db.all("UPDATE DONATION_REQUESTS SET DETERMINED_DATE = '' WHERE SSN = ?", [row[0].SSN], (err) => {
-        db.all('select*from donation_requests where ssn = ?', [row[0].SSN], (err, records) => {
+      db.all(`UPDATE DONATION_REQUESTS SET DETERMINED_DATE = '' WHERE SSN = ? and ADDED!=1 and TEST_RESULT != "REJECTED"`, [row[0].SSN], (err) => {
+        db.all('select*from donation_requests where ssn = ? and ADDED!=1 and TEST_RESULT != "REJECTED"', [row[0].SSN], (err, records) => {
           res.render('pages/CHGAppointement', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", res: records[0] })
         })
       })
