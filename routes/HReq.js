@@ -18,7 +18,7 @@ router.post('/', async(req, res) =>{
     var today = new Date();
     var curr_date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
-    
+    if(Quantity<0) return res.render('pages/HReq', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Invalid Input!" });
     var org_Id_SQl =` select O_ID from ORGANIZATIONs WHERE LOGGED =1 `;
     let ID ;
     db.all(org_Id_SQl, 

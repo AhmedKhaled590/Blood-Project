@@ -30,7 +30,7 @@ router.post('/', function (req, res, next) {
     //if(typeof num!='number') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid Phone number!" })
     //if(typeof ssn!='number') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid SSN!" })
     if(confirmPassword!=password) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Passwords do not match!" })
-    if(weight<0) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Invalid Weight!" })
+    if(weight<0||num<0||age<0) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Invalid Input!" })
     
     // lazem te3mel select 3al SSN l awal w lw rege3lek msh fady show message eno meta5ed
     db.all(`INSERT INTO DONOR(SSN,Fname,Minit,Lname,Age,Address,Phone_Num,Email,pass_word,Gender,Blood_Type,Logged,Notification)
