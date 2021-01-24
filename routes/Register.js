@@ -30,14 +30,14 @@ router.post('/', function (req, res, next) {
     //if(typeof num!='number') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid Phone number!" })
     //if(typeof ssn!='number') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid SSN!" })
     if(confirmPassword!=password) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Passwords do not match!" })
-    if(weight<0||num<0||age<0) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Invalid Input!" })
-    
-    // lazem te3mel select 3al SSN l awal w lw rege3lek msh fady show message eno meta5ed
+    if(ssn<10000000000000)return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Invalid SSN!" })
+    if(weight<0) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Invalid Weight!" })
+    if(num<0||num<01000000000) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Invalid Phone Number!" })
     db.all(`INSERT INTO DONOR(SSN,Fname,Minit,Lname,Age,Address,Phone_Num,Email,pass_word,Gender,Blood_Type,Logged,Notification)
           VALUES(?,?,?,?,?,?,?,?,?,?,?,1,'No Notifiction')`,
       [ssn, firstName, Minit, lastName, age, address, num, email, password, gender, bloodGroup],
       (err) => {
-        if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "May You have already an email" })
+        if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: err.message })
         res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", UserName: firstName + " " + lastName })
       })
   }
@@ -60,13 +60,18 @@ router.post('/', function (req, res, next) {
     //if(typeof num!='number') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid Phone number!" })
     //if(typeof ssn!='number') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid SSN!" })
     if(confirmPassword!=password) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Passwords do not match!" })
+    if(confirmPassword!=password) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Passwords do not match!" })
+    if(ssn<10000000000000)return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Invalid SSN!" })
+    if(weight<0) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Invalid Weight!" })
+    if(num<0||num<01000000000) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Invalid Phone Number!" })
+    if(age<16)return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Age must be greater than 16!" })
 
     db.all(`INSERT INTO PATIENT(SSN,Fname,Minit,Lname,Age,Address,Phone_Num,Email,pass_word,Gender,Blood_Type,Logged,Notification)
     VALUES(?,?,?,?,?,?,?,?,?,?,?,1,'No Notification')`,
     [ssn, firstName, Minit, lastName, age, address, num, email, password, gender, bloodGroup],
     (err) => {
-      if (err) return console.log(err);
-        res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", UserName: firstName + " " + lastName })
+      if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: err.message })
+      res.render('pages/Home', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", UserName: firstName + " " + lastName })
       })
   }
   else if(req.body.UserType === "Organization"){
@@ -77,10 +82,11 @@ router.post('/', function (req, res, next) {
     var confirmPassword = req.body.confirmPassword;
     //if(typeof number!='number') return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Enter a valid Phone number!" })
     if(confirmPassword!=pass) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Passwords do not match!" })
+    if(num<0||num<01000000000) return res.render('pages/Register', { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg",msg:"Invalid Phone Number!" })
     db.all(`INSERT INTO ORGANIZATIONS(O_name,Email,Pass_word,Phone_Num,Location,logged,Notification)
             VALUES(?,?,?,?,?,1,'No  Notification')`,[OrganizationName,email,password,PhoneNo,Gov+''+Address],
             (err)=>{
-              if(err) return console.log(err);
+              if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: err.message })
               res.render('pages/Home',{ title: "Blood Bank", css1: "home", css2: "Preq", css3: "animate", scrp: "home", UserName: OrganizationName })
             })
   }

@@ -192,8 +192,6 @@ router.post('/DonRecords', function (req, res, next) {
       })
     }
   });
-
-
 });
 
 
@@ -204,10 +202,9 @@ router.get('/Tests', function (req, res, next) {
   var User;
   db.each('SELECT fname,lname FROM EMPLOYEE where logged =1', function (err, user) {
     User = user;
-    db.all('SELECT d.ssn,d.fname,d.blood_type,q.test_result,dr.fname as drname FROM DONOR D,Donation_requests q ,DOCTORs_DONORS_CASES N,doctor dr WHERE q.ssn=d.ssn and D.SSN = N.SSN and dr.ssn = n.DOCTOR_SSN anD q.test_result="CONFIRMED" and q.DETERMINED_DATE==""', [], function (err, rows) {
+    db.all('SELECT d.ssn,d.fname,d.blood_type,q.test_result FROM DONOR D,Donation_requests q  WHERE q.ssn=d.ssn anD q.test_result="CONFIRMED" and q.DETERMINED_DATE==""', [], function (err, rows) {
       if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
-
-      db.all('SELECT d.ssn,d.fname,d.blood_type,q.test_result,dr.fname as drname FROM DONOR D,Donation_requests q ,DOCTORs_DONORS_CASES N,doctor dr WHERE q.ssn=d.ssn and D.SSN = N.SSN and dr.ssn = n.DOCTOR_SSN anD q.test_result="CONFIRMED" and q.DETERMINED_DATE==""', (err, ssns) => {
+      db.all('SELECT d.ssn,d.fname,d.blood_type,q.test_result FROM DONOR D,Donation_requests q  WHERE q.ssn=d.ssn anD q.test_result="CONFIRMED" and q.DETERMINED_DATE==""', (err, ssns) => {
         console.log(ssns)
         res.render('pages/TestRes', { title: "Blood Bank", css1: "home", css2: "style", css3: "animate", scrp: "home", UserName: User.Fname, res: rows, ssn: ssns })
       });
@@ -230,9 +227,9 @@ router.post('/Tests', function (req, res, next) {
       db.all('update Donation_requests set DETERMINED_DATE = ? WHERE SSN = ?', [Don_date, SSN], function (err) {
         if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
         else {
-          db.all('SELECT d.ssn,d.fname,d.blood_type,q.test_result,dr.fname as drname FROM DONOR D,Donation_requests q ,DOCTORs_DONORS_CASES N,doctor dr WHERE q.ssn=d.ssn and D.SSN = N.SSN and dr.ssn = n.DOCTOR_SSN and q.test_result="CONFIRMED" and q.DETERMINED_DATE==""', [], function (err, rows) {
+          db.all('SELECT d.ssn,d.fname,d.blood_type,q.test_result FROM DONOR D,Donation_requests q  WHERE q.ssn=d.ssn anD q.test_result="CONFIRMED" and q.DETERMINED_DATE==""', [], function (err, rows) {
             if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
-            db.all('SELECT d.ssn,d.fname,d.blood_type,q.test_result,dr.fname as drname FROM DONOR D,Donation_requests q ,DOCTORs_DONORS_CASES N,doctor dr WHERE q.ssn=d.ssn and D.SSN = N.SSN and dr.ssn = n.DOCTOR_SSN anD q.test_result="CONFIRMED" and q.DETERMINED_DATE==""', (err, ssns) => {
+            db.all('SELECT d.ssn,d.fname,d.blood_type,q.test_result FROM DONOR D,Donation_requests q  WHERE q.ssn=d.ssn anD q.test_result="CONFIRMED" and q.DETERMINED_DATE==""', (err, ssns) => {
               console.log(ssns)
               res.render('pages/TestRes', { title: "Blood Bank", css1: "home", css2: "style", css3: "animate", scrp: "home", UserName: User.Fname, res: rows, ssn: ssns })
             });
@@ -326,7 +323,6 @@ router.post('/Orders', function (req, res, next) {
       db.all("SELECT * FROM PATIENT_ORDER WHERE ORDER_ID = ?", [orderIdResOrd], (err, requ) => {
         if (err || requ[0] === undefined) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
         db.all("DELETE FROM INVENTORY WHERE Blood_Type= ? AND Sample_ID IN (SELECT Sample_ID FROM INVENTORY WHERE Blood_Type= ? limit ?)", [requ[0].Blood_Type, requ[0].Blood_Type, requ[0].Req_Amount], (err) => {
-          if (err || s[0] === undefined) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
           db.all("DELETE FROM PATIENT_ORDER WHERE ORDER_ID = ? ", [orderIdResOrd], (err) => {
             if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
             db.all("select*from Patient_order O,PATIENT P WHERE P.SSN=O.PATIENT_ID", (err, pat) => {
@@ -403,7 +399,7 @@ router.get('/Branches', function (req, res, next) {
   });
   db.all('SELECT*FROM BRANCH', [], function (err, branches) {
     if (err) return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "Not Found" })
-    res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branches, UserName: User.Fname })
+    res.render('pages/Branches', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Branch: branches, UserName: "" })
   })
 });
 

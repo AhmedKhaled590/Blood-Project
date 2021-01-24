@@ -12,7 +12,6 @@ db.each('SELECT fname,lname FROM DOCTOR where logged =1', function (err, user) {
 });
 router.get('/', function (req, res, next) {
   db.all('SELECT ID,Weight,DDate,LDate,Age from Donation_Requests R join Donor D on R.SSN=D.SSN where TEST_RESULT="QUEUED"', (err, rows) => {
-    console.log(rows);
     res.render('pages/Doctors_Test', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Requests: rows, UserName: "" })
   });
 });
@@ -20,26 +19,33 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
   let id = req.body.OrderIdTest
   let result = req.body.Res
-  db.all('SELECT * FROM Donation_Requests where TEST_RESULT="QUEUED" and ID=?', [id], (err, rows) => {
-    if (err) throw err;
-    console.log(rows);
-    if (rows == undefined) {
-      alert('no request with this id');
-      db.all('SELECT ID,Weight,DDate,LDate,Age from Donation_Requests R join Donor D on R.SSN=D.SSN where TEST_RESULT="QUEUED"', (err, rows) => {
-        console.log(rows);
-        res.render('pages/Doctors_Test', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Requests: rows, UserName: "" })
-      });
-    }
-    else {
-      db.all(`UPDATE Donation_Requests  SET TEST_RESULT=? WHERE ID=?`, [result, id], (err) => {
-        if (err) throw err;
-      });
-      alert('Request Updated Successfully');
-      db.all('SELECT ID,Weight,DDate,LDate,Age from Donation_Requests R join Donor D on R.SSN=D.SSn where TEST_RESULT="QUEUED"', (err, rows) => {
-        console.log(rows);
-        res.render('pages/Doctors_Test', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Requests: rows, UserName: "" });
-      });
-    }
+  db.all("Select TEST_RESULT from DONATION_REQUESTS WHERE ID = ?", [id], (err,r) => {
+    db.all('SELECT * FROM Donation_Requests where TEST_RESULT="QUEUED" and ID=?', [id], (err, rows) => {
+      if (err) throw err;
+      if (rows == undefined) {
+        alert('no request with this id');
+        db.all('SELECT ID,Weight,DDate,LDate,Age from Donation_Requests R join Donor D on R.SSN=D.SSN where TEST_RESULT="QUEUED"', (err, rows) => {
+          console.log(rows);
+          res.render('pages/Doctors_Test', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Requests: rows, UserName: "" })
+        });
+      }
+      else if (r[0].TEST_RESULT == "QUEUED") {
+        db.all(`UPDATE Donation_Requests  SET TEST_RESULT=? WHERE ID=?`, [result, id], (err) => {
+          if (err) throw err;
+        });
+        alert('Request Updated Successfully');
+        db.all('SELECT ID,Weight,DDate,LDate,Age from Donation_Requests R join Donor D on R.SSN=D.SSn where TEST_RESULT="QUEUED"', (err, rows) => {
+          console.log(rows);
+          res.render('pages/Doctors_Test', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Requests: rows, UserName: "" });
+        });
+      }
+      else {
+        alert('no request with this id is Queued');
+        db.all('SELECT ID,Weight,DDate,LDate,Age from Donation_Requests R join Donor D on R.SSN=D.SSN where TEST_RESULT="QUEUED"', (err, rows) => {
+          res.render('pages/Doctors_Test', { title: "Blood Bank", css1: "home", css2: "Preq", css3: "reg", scrp: "home", Requests: rows, UserName: "" })
+        });
+      }
+    });
   });
 });
 
