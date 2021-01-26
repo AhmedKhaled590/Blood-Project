@@ -1,63 +1,65 @@
 <%- include('../templates/header.ejs'); %>
 
 
-<body>
+  <body>
     <nav style="margin:0;" class="navbar navbar-expand-lg navbar-dark bg-trans">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <div class="collapse navbar-collapse" id="navbarColor01">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-            </li>
-          </ul>
-          <a style="width: 1%;" href="/Notif"><img style="width: 100%;" src="../../images/notification.png"></a>
-          <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
-          <p class="nav-item nav-link"><%= (typeof UserName !== 'undefined') ? UserName : 'User Name' %></p>
-          <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <a style="width: 1%;" href="/Notif"><img style="width: 100%;" src="../../images/notification.png"></a>
+        <img style="width: 1%;margin-left: 2%;" src="../../images/user.svg">
+        <p class="nav-item nav-link">
+          <%= (typeof UserName !=='undefined' ) ? UserName : '' %>
+        </p>
+        <a style="width:1% ;" href="/"><img style="width: 150%;" src="../../images/log-out.png"></a>
 
-        </div>
-      </nav>
+      </div>
+    </nav>
     <!-- main -->
-  
-<body>
-    
-    <div class="container mt-5">
+
+    <body>
+
+      <div class="container mt-5">
         <div class="title">
           <h3>Notifications</h3>
         </div>
-    </div>
+      </div>
 
-    <!-- loop on notification to display them  -->
-    <%   data.forEach((row) => { %>
-    <div class="alert alert-primary">
-        <div class="container">
+      <!-- loop on notification to display them  -->
+      <% data.forEach((row)=> { %>
+        <div class="alert alert-primary">
+          <div class="container">
             <div class="alert-icon">
-                <i class="material-icons">update</i>
+              <i class="material-icons">update</i>
             </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true"><i class="material-icons">clear</i></span>
+              <span aria-hidden="true"><i class="material-icons">clear</i></span>
             </button>
-            <b style="color: black;">Primary Alert: </b>   <%= row.Notification  %>
+            <b style="color: black;">Primary Alert: </b>
+            <%= row.Notification %>
+          </div>
         </div>
-    </div>
-    <%  });  %>
+        <% }); %>
 
-    <% if (  data[0] == undefined ) { %>
-      <div class="alert alert-primary">
-        <div class="container">
-            <div class="alert-icon">
-                <i class="material-icons">update</i>
+          <% if ( data[0]==undefined ) { %>
+            <div style="font-size: 30px;" class="alert alert-danger">
+              <div class="container">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                </button>
+                <span>
+                  <%=You Must Log In First%>
+                </span>
+              </div>
             </div>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true"><i class="material-icons">clear</i></span>
-            </button>
-            <b style="color: black;">Primary Alert: </b>  No one is logged to the site
-        </div>
-    </div>
-    <% }  %>
-</body>
-<%- include('../templates/footer.ejs'); %>
+            <% } %>
+    </body>
+    <%- include('../templates/footer.ejs'); %>

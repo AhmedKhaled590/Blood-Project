@@ -15,7 +15,6 @@ router.get('/', function(req, res, next) {
   db.all(doctor, [], (err, rows) => {
     if (err ||rows[0] == undefined ) 
     {
-      console.log(err) ;   // if error go to home 
       db.all(patient, [], (err, rows) => {
         if (err ||rows[0] == undefined) 
         {
@@ -27,12 +26,10 @@ router.get('/', function(req, res, next) {
               db.all(donor, [], (err, rows) => {
                 if (err ||rows[0] == undefined) 
                 {
-                  console.log(err);  
-                  return res.render('pages/Notif',{title:"Blood Bank",css1:"reg",css2:"notif",css3:"animate",scrp:"notif" , data:rows})
+                  return res.render("error", { title: "Blood Bank", css1: "reg", css2: "", css3: "", scrp: "reg", message: "You Must Log in First" });
                 }
                 else 
                 {  
-                    // if done display them
                     return res.render('pages/Notif',{title:"Blood Bank",css1:"reg",css2:"notif",css3:"animate",scrp:"notif" , data:rows})
                 }
               })
